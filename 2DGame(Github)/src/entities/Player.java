@@ -1,28 +1,50 @@
 package entities;
 
-import static utils.Constants.PlayerConstants.*;
+import static utils.Constants.PlayerConstants.GetSpriteAmount;
+import static utils.Constants.PlayerConstants.IDLE;
+import static utils.Constants.PlayerConstants.RUNNING;
+
+import static utils.HelperMethods.*;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.imageio.ImageIO;
 
 import utils.LoadSave;
+import main.Game;
+
+
+import static main.Game.SCALE;
 
 public class Player extends Entity{
 
 	private BufferedImage[][] animation; //stores all the frames of the sprite in a 3D array
-	private int animationTick, animationIndex, animationSpeed = 30;
+	private int animationTick, animationIndex, animationSpeed = 30; // how fast the player animates
 	private int playerAction = IDLE; // default action
 	private boolean moving = false; // if idle not moving
-	private boolean left, up, right, down;
-	private float playerSpeed = 1.0f;
+	private boolean left, up, right, down, jump; //wasd and jump
+	private float playerSpeed = 0.5f * SCALE; // how fast the charcater moves 
+	private int[][] lvlData;
+	private float xDrawOffset = 5 * Game.SCALE;
+	private float yDrawOffset = 1 * Game.SCALE;
+	
+	// jumping / gravity 
+	private float airSpeed = 0f; // the speed at which we are travelling through the air, jumping and falling 
+	private float gravity = 0.01f * SCALE; // the speed at which the player fall back down  
+	private float jumpSpeed = -0.75f * SCALE; // jumping up in y direction 
+	private float fallSpeedAfterCollision = 0.5f * SCALE; // in case the player is hitting the roof
+	private boolean inAir = false; // is player in air 
 	
 	public Player(float x, float y, int width, int height) { //player constructor 
 		super(x, y, width, height);
 		loadAnimation();
+		initializeHitbox(x, y, (int) (7 * SCALE),(int) (14 * SCALE)); //
+
+		//		hitbox = new Rectangle();
+//		hitbox.x = (int) (5 * SCALE);
+//		hitbox.y = (int) (1 * SCALE);
+//		hitbox.width = (int) (7 *SCALE);
+//		hitbox.height = (int) (14*SCALE);
+		
 	}
 
 	public void update() {
@@ -33,26 +55,11 @@ public class Player extends Entity{
 	
 	public void render(Graphics g) {
 		
-		g.drawImage(animation[playerAction][animationIndex], (int)x, (int)y,64,64, null); //64 - size of the sprite, can increase and decrease size 
-
+		g.drawImage(animation[playerAction][animationIndex], (int)(hitbox.x - xDrawOffset), (int) (hitbox.y - yDrawOffset),width,height, null); //64 - size of the sprite, can increase and decrease size 
+		//drawHitbox(g);
+		
 	}
 	
-
-	//method to load the player sprite and the frames of the sprite into an array
-	private void loadAnimation() {
-		 
-			BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYERATLAS);
-					
-			animation = new BufferedImage[3][3]; //size of the sprite
-			
-			for (int i = 0; i < animation.length; i++)
-			for(int j = 0; j < animation[i].length; j++)
-				animation[i][j] = img.getSubimage(j*16, i*16, 16, 16); //16 is the size of each 'frame' is the sprite
-		
-	
-	}
-		
-		
 	//method to loop through the array list of frames to "animate" the player
 	private void updateAnimation() {
 			
@@ -66,47 +73,115 @@ public class Player extends Entity{
 			}
 	}
 	
-	//method to set the animation of the player based on its action
+	
+	//method to set the animation of the player based on the action
 	public void setAnimation() {
 		int startAnimation = playerAction;
 		
 		if(moving)
-			playerAction = RUNNING;
+			playerAction = RUNNING; //if moving, use the running animation
 		else
-			playerAction = IDLE;
+			playerAction = IDLE; //if idle, use idle animation 
 		
 		if (startAnimation != playerAction)
 			resetAnimationTick();
 	}
-	
+
 	private void resetAnimationTick() {
 		animationTick = 0;
 		animationIndex = 0;
 	}
-
+	
 	private void updatePlayerPosition() {
 		moving = false;
 		
-		if(left && !right) { //if character is moving ledt and not right
-			x -= playerSpeed;
-			moving = true;
-		}
-		else if (right && !left) {
-			x += playerSpeed;
-			moving = true;
+		if(jump)
+			jump();
+		
+		if(!left && !right && !inAir)
+			return;
+			
+		float xSpeed = 0;
+		
+		if(left )  // if character is moving left 
+			xSpeed -= playerSpeed;
+		if (right ) // if character is moving right 
+			xSpeed += playerSpeed; 
+		
+		if(!inAir) {
+			if(!IsEntityOnFloor(hitbox, lvlData)) {
+				inAir = true;
+			}
 		}
 		
-		if(up && !down) { //if character is moving up and not down
-			y -= playerSpeed;
-			moving = true;
+		if(inAir) { //need to check both x and y direction 
+			
+			if(CanMoveHere(hitbox.x + xSpeed, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
+				hitbox.y += airSpeed;
+				airSpeed += gravity;
+				updateXPosition(xSpeed);
+			}	
+			else {
+				hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, airSpeed);
+				if(airSpeed > 0)
+					resetInair();
+				else {
+					airSpeed = fallSpeedAfterCollision;
+					updateXPosition(xSpeed);
+				}
+			}
 		}
-		else if (down && !up) {
-			y += playerSpeed;
-			moving = true;
+		else { // if not in air, only need to check x direction 
+			updateXPosition(xSpeed);
 		}
+		
+		moving = true;
 		
 	}
+
+	private void jump() {
+		if(inAir)
+			return;
+		inAir = true;
+		airSpeed = jumpSpeed;
+		
+	}
+
+	private void resetInair() {
+		inAir = false;
+		airSpeed = 0;
+		
+	}
+
+	private void updateXPosition(float xSpeed) {
+
+		if(CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
+			hitbox.x += xSpeed;
+		}
+		else {
+			hitbox.x = GetEntityPosNextToWall(hitbox, xSpeed);
+		}
+	}
+
+	//method to load the player sprite and the frames of the sprite into an array
+	private void loadAnimation() {
+		 
+			BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYERATLAS);
+					
+			animation = new BufferedImage[3][3]; //size of the sprite
+			
+			for (int i = 0; i < animation.length; i++)
+			for(int j = 0; j < animation[i].length; j++)
+				animation[i][j] = img.getSubimage(j*16, i*16, 16, 16); //16 is the size of each 'frame' is the sprite
+	}
 	
+	public void loadLvlData(int[][] lvlData) {
+		this.lvlData = lvlData;
+		if(!IsEntityOnFloor(hitbox, lvlData))
+			inAir = true;
+	}
+	
+
 	public void resetDirectionBooleans() {
 		left = false;
 		right = false;
@@ -145,6 +220,11 @@ public class Player extends Entity{
 	public void setDown(boolean down) {
 		this.down = down;
 	}
+	
+	public void setJump(boolean jump) {
+		this.jump = jump;
+	}
+
 	
 	
 	

@@ -10,7 +10,7 @@ public class GameWindow extends JFrame{
 	public GameWindow(GamePanel gamepanel) { 
 		
 		this.add(gamepanel);
-		this.setBackground(Color.BLACK); //not working?
+		//this.setBackground(Color.BLACK); //not working?
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null); //runs the window center of the screen
 		this.setResizable(false);

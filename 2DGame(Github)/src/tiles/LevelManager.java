@@ -9,86 +9,78 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import main.Game;
 import utils.LoadSave;
-import java.util.Scanner;
+
 
 public class LevelManager {
 	
 	private Game game;
-	private Tile[] tile;
+	private Level levelOne;
 	private BufferedImage[] levelSprite;
-	private int mapTileNum[][];
 	
 	public LevelManager(Game game) {
 		this.game = game;
-		tile = new Tile[2]; //number of tiles we have
-		mapTileNum = new int[TILES_IN_WIDTH][TILES_IN_HEIGHT];
 		importTileSprite();
-		importMap();
-	
+		levelOne = new Level(LoadSave.getLevelData()); //number of tiles we have
+		
+		
 	}
 	
-	
-	
-	private void importMap() {
-		try {
-			BufferedReader in = new BufferedReader(new FileReader("res/map_1.txt"));
-			String line;
-			int num;
-			for (int r = 0; r < TILES_IN_HEIGHT; r++) {
-				line = in.readLine();
-				String numbers[] = line.split(" ");
-				for (int c = 0; c < TILES_IN_WIDTH; c++) {
-					num = Integer.parseInt(numbers[c]);
-					mapTileNum[c][r] = num;
-				}
-			}
-			
-			in.close();
-		} catch (IOException e) {
-			System.out.println("not working bruj"); }	
-	}
+	// method to import the text file with our level generation info
+//	private void importMap() { //delete later
+//        try {
+//            BufferedReader in = new BufferedReader(new FileReader("res/map_1.txt"));
+//            String line;
+//            int num;
+//            for (int r = 0; r < TILES_IN_HEIGHT; r++) {
+//                line = in.readLine();
+//                String numbers[] = line.split(" ");
+//                for (int c = 0; c < TILES_IN_WIDTH; c++) {
+//                    num = Integer.parseInt(numbers[c]);
+//                    mapTileNum[c][r] = num; //map numbers stored in array
+//                }
+//            }
+//            
+//            in.close();
+//        } catch (IOException e) {
+//            System.out.println("file not read"); }
+//    }
 
 	private void importTileSprite() {
 		BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.LEVELATLAS);
-		levelSprite = new BufferedImage[2];	
-		for(int j = 0; j < 1; j++)
-			for(int i = 0; i < 2; i++) {
+		levelSprite = new BufferedImage[2];	//number of tiles our tile sprite has
+		for(int j = 0; j < 1; j++) //height of tile sprite
+			for(int i = 0; i < 2; i++) { //width of tile sprite
 				int index = j*2 + i;
-				levelSprite[index] = img.getSubimage(i * 32, j * 32, 32, 32);
+				levelSprite[index] = img.getSubimage(i * 16, j * 16, 16, 16); // 32 - size of tile
 			}
 	}
 
-	public void draw(Graphics g) {
-	int x = 0;
-	int y = 0;
-	int tileNum;
-		for (int r = 0; r < TILES_IN_HEIGHT; r++) {
-			for (int c = 0; c < TILES_IN_WIDTH; c++) {
-				tileNum = mapTileNum[c][r];
-				g.drawImage(levelSprite[tileNum], x, y, TILE_SIZE,TILE_SIZE, null);
-				x += TILE_SIZE;
-			}
-			y += TILE_SIZE;
-			x = 0;
-		}
+	 public void draw(Graphics g) {
+		    int x = 0;
+		    int y = 0;
+		    int tileNum;
+		        for (int r = 0; r < TILES_IN_HEIGHT; r++) {
+		            for (int c = 0; c < TILES_IN_WIDTH; c++) {
+		                tileNum = levelOne.getSpriteIndex(r, c);
+		                g.drawImage(levelSprite[tileNum], x, y, TILE_SIZE,TILE_SIZE, null);
+		                x += TILE_SIZE;
+		            }
+		            y += TILE_SIZE;
+		            x = 0;
+		        }
+		    }
+
+		   
+
+	public void update() {
+		
 	}
 
-    public void printMap(int[][] mapTileNum) {
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 20; j++) {
-                System.out.print(mapTileNum[i][j] + " ");
-            }
-            System.out.println();
-        }}
-	
-//	public void update() {
-//		
-//	}
-	
+	public Level getCurrentLevel() {
+		return levelOne;
+	}
 
 }
