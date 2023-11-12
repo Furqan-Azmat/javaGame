@@ -30,7 +30,7 @@ public class Player extends Entity{
 	// jumping / gravity 
 	private float airSpeed = 0f; // the speed at which we are travelling through the air, jumping and falling 
 	private float gravity = 0.01f * SCALE; // the speed at which the player fall back down  
-	private float jumpSpeed = -0.75f * SCALE; // jumping up in y direction 
+	private float jumpSpeed = -1.0f * SCALE; // jumping up in y direction 
 	private float fallSpeedAfterCollision = 0.5f * SCALE; // in case the player is hitting the roof
 	private boolean inAir = false; // is player in air 
 	
