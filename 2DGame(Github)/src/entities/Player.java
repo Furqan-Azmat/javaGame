@@ -12,34 +12,36 @@ import java.awt.image.BufferedImage;
 import utils.LoadSave;
 import main.Game;
 
+import static main.Game.*;
 
-import static main.Game.SCALE;
 
 public class Player extends Entity{
 
+	//basic character movements 
 	private BufferedImage[][] animation; //stores all the frames of the sprite in a 3D array
 	private int animationTick, animationIndex, animationSpeed = 30; // how fast the player animates
 	private int playerAction = IDLE; // default action
 	private boolean moving = false; // if idle not moving
 	private boolean left, up, right, down, jump; //wasd and jump
-	private float playerSpeed = 0.5f * SCALE; // how fast the charcater moves 
+	private float playerSpeed = 0.5f * SCALE; // how fast the character moves 
 	private int[][] lvlData;
 	private float xDrawOffset = 5 * Game.SCALE;
 	private float yDrawOffset = 1 * Game.SCALE;
 	
 	// jumping / gravity 
-	private float airSpeed = 0f; // the speed at which we are travelling through the air, jumping and falling 
+	private float airSpeed = 0f; // the speed at which we are traveling through the air, jumping and falling 
 	private float gravity = 0.01f * SCALE; // the speed at which the player fall back down  
 	private float jumpSpeed = -1.0f * SCALE; // jumping up in y direction 
 	private float fallSpeedAfterCollision = 0.5f * SCALE; // in case the player is hitting the roof
 	private boolean inAir = false; // is player in air 
 	
+
 	public Player(float x, float y, int width, int height) { //player constructor 
 		super(x, y, width, height);
 		loadAnimation();
-		initializeHitbox(x, y, (int) (7 * SCALE),(int) (14 * SCALE)); //
+		initializeHitbox(x, y, (int) (7 * SCALE),(int) (14 * SCALE)); //size of hitbox 
 
-		//		hitbox = new Rectangle();
+//		hitbox = new Rectangle();
 //		hitbox.x = (int) (5 * SCALE);
 //		hitbox.y = (int) (1 * SCALE);
 //		hitbox.width = (int) (7 *SCALE);
@@ -53,9 +55,11 @@ public class Player extends Entity{
 		setAnimation(); //sets animation based on player action 
 	}
 	
-	public void render(Graphics g) {
+	
+
+	public void render(Graphics g, int lvlOffset) {
 		
-		g.drawImage(animation[playerAction][animationIndex], (int)(hitbox.x - xDrawOffset), (int) (hitbox.y - yDrawOffset),width,height, null); //64 - size of the sprite, can increase and decrease size 
+		g.drawImage(animation[playerAction][animationIndex], (int)(hitbox.x - xDrawOffset) - lvlOffset, (int) (hitbox.y - yDrawOffset),width,height, null); //64 - size of the sprite, can increase and decrease size 
 		//drawHitbox(g);
 		
 	}
