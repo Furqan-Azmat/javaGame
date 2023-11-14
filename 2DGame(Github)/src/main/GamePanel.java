@@ -15,7 +15,7 @@ public class GamePanel extends JPanel {
 	
 	//global vars 
 	private Game game;
-	boolean isDraw = false;
+	//boolean isDraw = false;
 	
 	public GamePanel(Game game, GameWindow window) { // game panel constructor
 		this.game = game;
