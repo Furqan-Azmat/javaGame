@@ -8,6 +8,7 @@ import static main.Game.WORLD_IN_WIDTH;
 
 import java.awt.Graphics;
 
+import entities.EnemyManager;
 import entities.Player;
 import tiles.LevelManager;
 
@@ -21,16 +22,16 @@ public class Game implements Runnable{
 	
 	//screen size
 	public final static int DEFAULT_TILE_SIZE = 16;
-	public final static float SCALE = 4.0f;
-	public final static int TILES_IN_WIDTH = 20; // visible game screen is 20 tiles wide
-	public final static int TILES_IN_HEIGHT = 10; // visible game screen is 10 tiles long
+	public final static float SCALE = 2.0f;
+	public final static int TILES_IN_WIDTH = 40; // visible game screen is 20 tiles wide
+	public final static int TILES_IN_HEIGHT = 20; // visible game screen is 10 tiles long
 	public final static int TILE_SIZE = (int) (DEFAULT_TILE_SIZE * SCALE);
 	public final static int GAME_WIDTH = TILE_SIZE * TILES_IN_WIDTH;
 	public final static int GAME_HEIGHT = TILE_SIZE * TILES_IN_HEIGHT;
 	
 	//world size 
 	public final static int WORLD_IN_WIDTH = 40; // the number of tiles the entire map is in width
-	public final static int WORLD_IN_HEIGHT = 10; // game screen height and the entire map height is the same
+	public final static int WORLD_IN_HEIGHT = 20; // game screen height and the entire map height is the same
 	public final static int WORLD_WIDTH = TILE_SIZE * WORLD_IN_WIDTH; 
 	public final static int WORLD_HEIGHT = TILE_SIZE * WORLD_IN_HEIGHT;
 	
@@ -46,6 +47,7 @@ public class Game implements Runnable{
 	
 
 	private LevelManager levelManager;
+	private EnemyManager enemyManager;
 	private Player player;
 	
 	public Game(GameWindow window) { //game constructor
@@ -104,7 +106,9 @@ public class Game implements Runnable{
 
 	public void render(Graphics g) {	
 		levelManager.draw(g, xLevelOffset);
+		levelManager.addEnemies(g);
 		player.render(g, xLevelOffset);
+		//enemy.drawCharacter(g);
 	}
 	
 	@Override

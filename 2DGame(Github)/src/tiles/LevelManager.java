@@ -10,6 +10,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import entities.EnemyType1;
+import entities.EnemyType2;
 import main.Game;
 import utils.LoadSave;
 
@@ -17,17 +19,16 @@ import utils.LoadSave;
 public class LevelManager {
 	
 	private Game game;
-	private Level levelOne;
+	private Level level;
 	private BufferedImage[] levelSprite;
+	private int lvlNum = 1;
 	
 	public LevelManager(Game game) {
 		this.game = game;
 		importTileSprite();
-		levelOne = new Level(LoadSave.getLevelData()); //number of tiles we have
-		
-		
+		level = new Level(LoadSave.getLevelData(lvlNum)); //number of tiles we have
 	}
-	
+
 	// method to import the text file with our level generation info
 //	private void importMap() { //delete later
 //        try {
@@ -64,7 +65,7 @@ public class LevelManager {
 		    int tileNum;
 		        for (int r = 0; r < Game.TILES_IN_HEIGHT; r++) {
 		            for (int c = 0; c < Game.WORLD_IN_WIDTH; c++) {
-		                tileNum = levelOne.getSpriteIndex(r, c);
+		                tileNum = level.getSpriteIndex(r, c);
 		                g.drawImage(levelSprite[tileNum], x, y, TILE_SIZE - lvlOffset,TILE_SIZE, null);
 		                x += TILE_SIZE;
 		            }
@@ -73,6 +74,20 @@ public class LevelManager {
 		        }
 		    }
 
+	 public void addEnemies(Graphics g) {
+			switch(lvlNum) {
+				case 1:
+					new EnemyType1(300, 350, 60, 60).drawCharacter(g);
+					//new EnemyType2(400, 300, 50, 60).drawCharacter(g);
+					//new EnemyType2(450, 200, 50, 60).drawCharacter(g);
+					break;
+				case 2:
+					new EnemyType1(100, 100, 60, 60).drawCharacter(g);
+					break;
+				case 3:
+					break;
+			}
+		}
 		   
 
 	public void update() {
@@ -80,7 +95,7 @@ public class LevelManager {
 	}
 
 	public Level getCurrentLevel() {
-		return levelOne;
+		return level;
 	}
 
 }

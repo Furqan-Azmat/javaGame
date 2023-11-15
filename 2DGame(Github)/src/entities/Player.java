@@ -60,7 +60,7 @@ public class Player extends Entity{
 	public void render(Graphics g, int lvlOffset) {
 		
 		g.drawImage(animation[playerAction][animationIndex], (int)(hitbox.x - xDrawOffset) - lvlOffset, (int) (hitbox.y - yDrawOffset),width,height, null); //64 - size of the sprite, can increase and decrease size 
-		drawHitbox(g); //for debugging hitbox 
+	//	drawHitbox(g); //for debugging hitbox 
 		
 	}
 	
