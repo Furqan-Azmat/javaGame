@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 
 import utils.LoadSave;
 
-
 public abstract class Enemy extends Entity{
 	BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.ENEMYATLAS);
 	//private BufferedImage enemy1, enemy2, enemy3;
@@ -15,9 +14,5 @@ public abstract class Enemy extends Entity{
 	}
 	
 	public abstract void drawCharacter(Graphics g); // abstract method forces implementation of enemy appearance for each enemy type
-	// hitbox method
 	
-	
-
-
 }
