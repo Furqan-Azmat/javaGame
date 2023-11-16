@@ -10,7 +10,7 @@ public class EnemyType3 extends Enemy {
 	}
 
 	public void drawCharacter(Graphics g) {
-		BufferedImage enemyImage = img.getSubimage(16, 0, 16, 16);
+		BufferedImage enemyImage = img.getSubimage(32, 0, 16, 16);
 		g.drawImage(enemyImage, (int)(x), (int) (y),width,height, null);
 		drawHitbox(g);
 	}
