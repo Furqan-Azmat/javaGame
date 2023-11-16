@@ -17,6 +17,7 @@ public class LoadSave {
 	public static final String PLAYERATLAS = "player.png";
 	public static final String LEVELATLAS = "tile_final.png";
 	public static final String ENEMYATLAS = "enemySprite.png";
+	public static final String COINATLAS = "Coin1.png";
 	public static BufferedImage GetSpriteAtlas(String SpriteFileName) {
 		BufferedImage img = null;
 		InputStream in = LoadSave.class.getResourceAsStream("/" + SpriteFileName);

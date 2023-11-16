@@ -4,6 +4,7 @@ import static main.Game.TILE_SIZE;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import entities.DrawCoin;
 import entities.EnemyType1;
 import entities.EnemyType2;
 import entities.EnemyType3;
@@ -60,6 +61,21 @@ public class LevelManager {
 					break;
 				case 2:
 					new EnemyType1(100, 100, 60, 60).drawCharacter(g);
+					break;
+				case 3:
+					break;
+			}
+		}
+	 
+	 public void addCoins(Graphics g) {
+			switch(lvlNum) { 
+				case 1:
+					new DrawCoin(525, 576, 32, 32).drawCharacter(g);
+					new DrawCoin(525, 544, 32, 32).drawCharacter(g);
+					new DrawCoin(564, 576, 32, 32).drawCharacter(g);
+					new DrawCoin(564, 544, 32, 32).drawCharacter(g);
+					break;
+				case 2:
 					break;
 				case 3:
 					break;

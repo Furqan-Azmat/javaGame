@@ -104,6 +104,7 @@ public class Game implements Runnable{
 	public void render(Graphics g) {	
 		levelManager.draw(g, xLevelOffset);
 		levelManager.addEnemies(g);
+		levelManager.addCoins(g);
 		player.render(g, xLevelOffset);
 		//enemy.drawCharacter(g);
 	}
