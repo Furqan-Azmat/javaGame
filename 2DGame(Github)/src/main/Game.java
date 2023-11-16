@@ -7,8 +7,6 @@ import static main.Game.TILE_SIZE;
 import static main.Game.WORLD_IN_WIDTH;
 
 import java.awt.Graphics;
-
-import entities.EnemyManager;
 import entities.Player;
 import tiles.LevelManager;
 
@@ -47,7 +45,6 @@ public class Game implements Runnable{
 	
 
 	private LevelManager levelManager;
-	private EnemyManager enemyManager;
 	private Player player;
 	
 	public Game(GameWindow window) { //game constructor

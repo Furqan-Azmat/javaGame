@@ -12,13 +12,12 @@ public class GameWindow extends JFrame{
 	private GameWindow window;
 	public GameWindow() { 
 		setTitle("This is a game");
-		setSize(1280,670); // CHANGE THE SIZE OF THE WINDOW TO SUIT THE GAME 
+		setSize(1294,675); // CHANGE THE SIZE OF THE WINDOW TO SUIT THE GAME 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); //runs the window center of the screen
 		setResizable(false);
 		window = this;
 		handler = new ButtonHandler();
-		
 		menu();
 		setVisible(true); // makes the window visible (ADD EVERYTHING THAT WILL SHOW UP BEFORE THIS LINE)
 	}

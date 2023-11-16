@@ -1,6 +1,7 @@
 package entities;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class EnemyType2 extends Enemy {
 
@@ -9,8 +10,10 @@ public class EnemyType2 extends Enemy {
 	}
 
 	public void drawCharacter(Graphics g) {
-		g.setColor(new Color(222, 0, 37));
-		g.drawRect((int)x, (int)y, width, height);
+		BufferedImage enemyImage = img.getSubimage(16, 0, 16, 16);
+		g.drawImage(enemyImage, (int)(x), (int) (y),width,height, null);
+		//setMovement(g, enemy);
+		drawHitbox(g);
 	}
 
 }

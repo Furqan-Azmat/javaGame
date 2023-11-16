@@ -16,7 +16,6 @@ import static main.Game.*;
 
 
 public class Player extends Entity{
-
 	//basic character movements 
 	private BufferedImage[][] animation; //stores all the frames of the sprite in a 3D array
 	private int animationTick, animationIndex, animationSpeed = 30; // how fast the player animates
@@ -31,21 +30,14 @@ public class Player extends Entity{
 	// jumping / gravity 
 	private float airSpeed = 0f; // the speed at which we are traveling through the air, jumping and falling 
 	private float gravity = 0.01f * SCALE; // the speed at which the player fall back down  
-	private float jumpSpeed = -1.0f * SCALE; // jumping up in y direction 
+	private float jumpSpeed = -0.75f * SCALE; // jumping up in y direction 
 	private float fallSpeedAfterCollision = 0.5f * SCALE; // in case the player is hitting the roof
 	private boolean inAir = false; // is player in air 
-	
 
 	public Player(float x, float y, int width, int height) { //player constructor 
 		super(x, y, width, height);
 		loadAnimation();
-		initializeHitbox(x, y, (int) (7 * SCALE),(int) (14 * SCALE)); //size of hitbox 
-
-//		hitbox = new Rectangle();
-//		hitbox.x = (int) (5 * SCALE);
-//		hitbox.y = (int) (1 * SCALE);
-//		hitbox.width = (int) (7 *SCALE);
-//		hitbox.height = (int) (14*SCALE);
+		initializeHitbox(x, y, (int) (7 * SCALE),(int) (14 * SCALE)); //size of hitbox 	
 		
 	}
 
@@ -54,21 +46,16 @@ public class Player extends Entity{
 		updateAnimation(); // animates the character
 		setAnimation(); //sets animation based on player action 
 	}
-	
-	
 
 	public void render(Graphics g, int lvlOffset) {
 		
 		g.drawImage(animation[playerAction][animationIndex], (int)(hitbox.x - xDrawOffset) - lvlOffset, (int) (hitbox.y - yDrawOffset),width,height, null); //64 - size of the sprite, can increase and decrease size 
-	//	drawHitbox(g); //for debugging hitbox 
-		
+		drawHitbox(g); //for debugging hitbox 
 	}
 	
 	//method to loop through the array list of frames to "animate" the player
 	private void updateAnimation() {
-			
 			animationTick++;
-			
 			if(animationTick >= animationSpeed) {
 				animationTick = 0;
 				animationIndex++;
@@ -76,7 +63,6 @@ public class Player extends Entity{
 					animationIndex = 0;
 			}
 	}
-	
 	
 	//method to set the animation of the player based on the action
 	public void setAnimation() {
@@ -98,26 +84,20 @@ public class Player extends Entity{
 	
 	private void updatePlayerPosition() {
 		moving = false;
-		
 		if(jump)
 			jump();
-		
 		if(!left && !right && !inAir)
 			return;
-			
 		float xSpeed = 0;
-		
 		if(left )  // if character is moving left 
 			xSpeed -= playerSpeed;
 		if (right ) // if character is moving right 
 			xSpeed += playerSpeed; 
-		
 		if(!inAir) {
 			if(!IsEntityOnFloor(hitbox, lvlData)) {
 				inAir = true;
 			}
 		}
-		
 		if(inAir) { //need to check both x and y direction 
 			
 			if(CanMoveHere(hitbox.x + xSpeed, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
@@ -138,9 +118,7 @@ public class Player extends Entity{
 		else { // if not in air, only need to check x direction 
 			updateXPosition(xSpeed);
 		}
-		
 		moving = true;
-		
 	}
 
 	private void jump() {
@@ -148,17 +126,14 @@ public class Player extends Entity{
 			return;
 		inAir = true;
 		airSpeed = jumpSpeed;
-		
 	}
 
 	private void resetInair() {
 		inAir = false;
 		airSpeed = 0;
-		
 	}
 
 	private void updateXPosition(float xSpeed) {
-
 		if(CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
 			hitbox.x += xSpeed;
 		}
@@ -169,11 +144,8 @@ public class Player extends Entity{
 
 	//method to load the player sprite and the frames of the sprite into an array
 	private void loadAnimation() {
-		 
-			BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYERATLAS);
-					
+			BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYERATLAS);	
 			animation = new BufferedImage[3][3]; //size of the sprite
-			
 			for (int i = 0; i < animation.length; i++)
 			for(int j = 0; j < animation[i].length; j++)
 				animation[i][j] = img.getSubimage(j*16, i*16, 16, 16); //16 is the size of each 'frame' is the sprite
@@ -185,7 +157,6 @@ public class Player extends Entity{
 			inAir = true;
 	}
 	
-
 	public void resetDirectionBooleans() {
 		left = false;
 		right = false;
@@ -228,10 +199,4 @@ public class Player extends Entity{
 	public void setJump(boolean jump) {
 		this.jump = jump;
 	}
-
-	
-	
-	
-	
-	
 }

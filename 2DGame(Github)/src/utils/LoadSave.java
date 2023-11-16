@@ -5,7 +5,6 @@ import static main.Game.TILES_IN_WIDTH;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,24 +16,16 @@ import main.Game;
 public class LoadSave {
 	public static final String PLAYERATLAS = "player.png";
 	public static final String LEVELATLAS = "tile_final.png";
+	public static final String ENEMYATLAS = "enemySprite.png";
 	public static BufferedImage GetSpriteAtlas(String SpriteFileName) {
 		BufferedImage img = null;
-		InputStream is = LoadSave.class.getResourceAsStream("/" + SpriteFileName);
-		
+		InputStream in = LoadSave.class.getResourceAsStream("/" + SpriteFileName);
 		try { 
-			img = ImageIO.read(is);
-			is.close();
+			img = ImageIO.read(in);
+			in.close();
 		} catch (IOException e) {
 			System.out.println("Error reading sprite file");
 		}
-			//finally {
-//			
-//			try {
-//				is.close();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
 		return img;
 	}
 	
@@ -42,7 +33,7 @@ public class LoadSave {
 		String fileName = null;
 		switch (lvlnum) {
 		case 1:
-			fileName = "res/map_1_long.txt";
+			fileName = "res/map_1.txt";
 			break;
 		case 2:
 			fileName = "res/map_2.txt";
