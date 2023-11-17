@@ -39,6 +39,7 @@ public class Game implements Runnable{
 	private int maxLevelOffsetX = maxTileOffset * TILE_SIZE;
 		
 	private int score = 0;
+    private int lvlNum = 1; // Add this line to declare lvlNum
 
 	private LevelManager levelManager;
 	private Player player;
@@ -51,19 +52,39 @@ public class Game implements Runnable{
 		sound = new Sound();
 		gamePanel.requestFocus(); //the inputs are focused to gamePanel
 		startGameLoop();
+		levelManager = new LevelManager(this);
 	}
+	
+    public int getLevelNumber() {
+        return lvlNum;
+    }
+	public void increaseScore(int points) {
+        score += points;
+        if (score >= 40) {
+            // Reset the score
+            score = 0;
+
+            // Increment the level number
+            lvlNum++;
+
+            // If the level number exceeds the maximum level, reset to the first level
+            if (lvlNum > 3) {
+                lvlNum = 1;
+            }
+
+            // Call the changeLevel method in the LevelManager
+            levelManager.changeLevel(lvlNum);
+
+            // Print a message for testing
+            System.out.println("Level changed to: " + lvlNum);
+        }
+    }
 	
 	// Get the score
 	public int getScore() {
         return score;
     }
 
-	// Update the score
-    public void increaseScore(int points) {
-        score += points;
-        if (score == 40)
-        	System.out.println("ALL COINS COLLECTED PLS CHANGE MAP");// ----- make it change the map pls
-    }
 	
 	private void initializeClasses() {
 		levelManager = new LevelManager(this);

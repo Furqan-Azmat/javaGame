@@ -23,6 +23,17 @@ public class LevelManager {
         initializeCoins(); // Populate the coins array based on the level
         initializeEnemies();
 	}
+	
+    public void changeLevel(int newLevel) {
+        lvlNum = newLevel;
+        level = new Level(LoadSave.getLevelData(lvlNum));
+        initializeCoins();
+        initializeEnemies();
+    }
+    
+    public int getLevelNumber() {
+        return lvlNum;
+    }
 
 	private void importTileSprite() {
 		BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.LEVELATLAS);
