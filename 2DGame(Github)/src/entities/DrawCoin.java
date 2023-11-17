@@ -18,4 +18,7 @@ public class DrawCoin extends Coins {
 		g.drawImage(coin, (int)(x), (int) (y),width,height, null);
 		drawHitbox(g);
 	}
+	
+	
+	
 }
