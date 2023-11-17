@@ -18,11 +18,13 @@ public class LevelManager {
 	private Level level;
 	private BufferedImage[] levelSprite;
 	private int lvlNum = 1;
+    private DrawCoin[] coins;
 	
 	public LevelManager(Game game) {
 		this.game = game;
 		importTileSprite();
 		level = new Level(LoadSave.getLevelData(lvlNum)); //number of tiles we have
+        initializeCoins(); // Populate the coins array based on the level
 	}
 
 	private void importTileSprite() {
@@ -68,19 +70,25 @@ public class LevelManager {
 		}
 	 
 	 public void addCoins(Graphics g) {
-			switch(lvlNum) { 
-				case 1:
-					new DrawCoin(525, 576, 32, 32).drawCharacter(g);
-					new DrawCoin(525, 544, 32, 32).drawCharacter(g);
-					new DrawCoin(564, 576, 32, 32).drawCharacter(g);
-					new DrawCoin(564, 544, 32, 32).drawCharacter(g);
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-			}
+			for (DrawCoin coin : coins) {
+	            coin.drawCharacter(g);
+	            coin.checkCollisionWithPlayer(game.getPlayer());
+	        }
 		}
+	 private void initializeCoins() {
+	        switch (lvlNum) {
+	            case 1:
+	                coins = new DrawCoin[]{
+	                		new DrawCoin(525, 576, 32, 32),
+	                		new DrawCoin(525, 544, 32, 32),
+	                		new DrawCoin(564, 576, 32, 32),
+	                		new DrawCoin(564, 544, 32, 32),
+	                        // Add more coins as needed for level 1
+	                };
+	                break;
+	            // Initialize coins for other levels similarly
+	        }
+	    }
 		   
 	public void update() {
 		
