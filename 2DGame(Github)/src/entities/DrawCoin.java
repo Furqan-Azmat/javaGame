@@ -13,6 +13,7 @@ public class DrawCoin extends Coins {
     }
 
     public void drawCharacter(Graphics g) {
+    	// Initially start by displaying coins
         if (isDisplayed) {
             BufferedImage coin = img.getSubimage(0, 0, 28, 26);
             g.drawImage(coin, (int) (x), (int) (y), width, height, null);
@@ -20,9 +21,10 @@ public class DrawCoin extends Coins {
         }
     }
 
+    // If the coin is visible and the coins hitbox intersects the players hitbox
     public boolean checkCollisionWithPlayer(Player player) {
         if (isDisplayed && super.getHitbox().intersects(player.getHitbox())) {
-            isDisplayed = false;
+            isDisplayed = false; // Turn the coin that was touched off 
             return true; // Collision detected
         }
         return false; // No collision

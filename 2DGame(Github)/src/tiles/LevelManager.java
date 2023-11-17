@@ -69,12 +69,15 @@ public class LevelManager {
 			}
 		}
 	 
+	 // Loop through the coin array made below and draw them along with checking for player collision 
 	 public void addCoins(Graphics g) {
 			for (DrawCoin coin : coins) {
 	            coin.drawCharacter(g);
 	            coin.checkCollisionWithPlayer(game.getPlayer());
 	        }
 		}
+	 
+	 // Initialize the array that will hold the coin objects 
 	 private void initializeCoins() {
 	        switch (lvlNum) {
 	            case 1:
