@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
-import main.Game;
 
 public class GameWindow extends JFrame{
 	private JPanel menuPanel;
@@ -22,7 +21,6 @@ public class GameWindow extends JFrame{
 		window = this;
 		handler = new ButtonHandler();
 		menu();
-		
 		setVisible(true); // makes the window visible (ADD EVERYTHING THAT WILL SHOW UP BEFORE THIS LINE)
 	}
 	

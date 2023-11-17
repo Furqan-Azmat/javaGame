@@ -38,7 +38,6 @@ public class Player extends Entity{
 		super(x, y, width, height);
 		loadAnimation();
 		initializeHitbox(x, y, (int) (7 * SCALE),(int) (14 * SCALE)); //size of hitbox 	
-		
 	}
 
 	public void update() {
@@ -48,7 +47,6 @@ public class Player extends Entity{
 	}
 
 	public void render(Graphics g, int lvlOffset) {
-		
 		g.drawImage(animation[playerAction][animationIndex], (int)(hitbox.x - xDrawOffset) - lvlOffset, (int) (hitbox.y - yDrawOffset),width,height, null); //64 - size of the sprite, can increase and decrease size 
 		//drawHitbox(g); //for debugging hitbox 
 	}
@@ -67,7 +65,6 @@ public class Player extends Entity{
 	//method to set the animation of the player based on the action
 	public void setAnimation() {
 		int startAnimation = playerAction;
-		
 		if(moving)
 			playerAction = RUNNING; //if moving, use the running animation
 		else
@@ -99,7 +96,6 @@ public class Player extends Entity{
 			}
 		}
 		if(inAir) { //need to check both x and y direction 
-			
 			if(CanMoveHere(hitbox.x + xSpeed, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
 				hitbox.y += airSpeed;
 				airSpeed += gravity;
@@ -156,7 +152,10 @@ public class Player extends Entity{
 		if(!IsEntityOnFloor(hitbox, lvlData))
 			inAir = true;
 	}
-	
+	public void respawn() {
+		hitbox.x = 32f;
+		hitbox.y = 576f;
+	}
 	public void resetDirectionBooleans() {
 		left = false;
 		right = false;

@@ -1,11 +1,5 @@
 package main;
 
-import static main.Game.GAME_WIDTH;
-import static main.Game.SCALE;
-import static main.Game.TILES_IN_WIDTH;
-import static main.Game.TILE_SIZE;
-import static main.Game.WORLD_IN_WIDTH;
-
 import java.awt.Graphics;
 
 import Sound.Sound;
@@ -51,15 +45,11 @@ public class Game implements Runnable{
 	private Sound sound;
 	
 	public Game(GameWindow window) { //game constructor
-		
-		
 		initializeClasses();
-		
-		gamePanel = new GamePanel(this, window); //gamepanel object
+		gameWindow = window;
+		gamePanel = new GamePanel(this); //gamepanel object
 		sound = new Sound();
 		gamePanel.requestFocus(); //the inputs are focused to gamePanel
-		
-		
 		startGameLoop();
 	}
 	
@@ -71,26 +61,25 @@ public class Game implements Runnable{
 	// Update the score
     public void increaseScore(int points) {
         score += points;
+        if (score == 40)
+        	System.out.println("ALL COINS COLLECTED PLS CHANGE MAP");// ----- make it change the map pls
     }
 	
 	private void initializeClasses() {
 		levelManager = new LevelManager(this);
 		player = new Player((2-1) * TILE_SIZE,(19-1)*TILE_SIZE, (int) (16 * SCALE), (int) (16 * SCALE)); 
 		player.loadLvlData(levelManager.getCurrentLevel().getLevelData());		
-		
 	}
 
 	private void startGameLoop() {
 		gameThread = new Thread(this);
 		gameThread.start();
-		
 	}
 	
 	private void update() {
 		levelManager.update();
 		player.update();
 		checkIfPlayerCloseToBorder();
-		
 	} 
 	
 	private void checkIfPlayerCloseToBorder() {
@@ -113,53 +102,41 @@ public class Game implements Runnable{
 		}
 	}
 
-
 	public void render(Graphics g) {	
 		levelManager.draw(g, xLevelOffset);
 		levelManager.addEnemies(g);
 		levelManager.addCoins(g);
 		player.render(g, xLevelOffset);
-		//enemy.drawCharacter(g);
 	}
 	
 	@Override
 	//game loop
 	public void run() {
-		
 		double timePerFrame = 1000000000.0 / FPS; //how long each frame is going to last in nanoseconds
 		double timePerUpdate = 1000000000.0 / UPS; //frequency of updates per second
-	
 		long previousTime = System.nanoTime(); //current time when the program starts in nanoseconds
-		
 		int frames = 0;
 		int updates = 0;
-	
 		long lastCheck = System.currentTimeMillis();
-		
 		double deltaTime = 0;
 		double deltaFrame = 0;
 		
 		while(true) { //infinite loop
-			
 			long currentTime = System.nanoTime();
-			
 			deltaTime += (currentTime - previousTime) / timePerUpdate;
 			deltaFrame += (currentTime - previousTime) / timePerFrame;
 			previousTime = currentTime; 
-			
 			if (deltaTime >= 1) {
 				// if the time now - the last time we drew is >= timeperframe, then draw again
 				update();
 				updates++;
 				deltaTime --;
 			}
-			
 			if (deltaFrame >= 1) {
 				gamePanel.repaint();
 				frames++;
 				deltaFrame--;
 			}
-			
 			//counts how many frames per second
 			if (System.currentTimeMillis() - lastCheck >= 1000) { 
 				lastCheck = System.currentTimeMillis();
@@ -178,22 +155,17 @@ public class Game implements Runnable{
 	}
 	
 	public void playMusic(int soundIndex) {
-		
 		sound.loadSound(soundIndex);
 		sound.play();
 		sound.loop();
-		
 	}
 	
 	public void playSoundEffect(int soundIndex) {
-		
 		sound.loadSound(soundIndex);
 		sound.play();
-		
 	}
 	
 	public void stopMusic() {
-		
 		sound.stop();
 	}
 	

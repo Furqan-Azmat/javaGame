@@ -1,16 +1,11 @@
 package tiles;
-import static main.Game.TILE_SIZE;
 
+import static main.Game.TILE_SIZE;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-
-import entities.DrawCoin;
-import entities.EnemyTypeGhost;
-import entities.EnemyTypeSnail;
-import entities.EnemyTypeBee;
+import entities.*;
 import main.Game;
 import utils.LoadSave;
-
 
 public class LevelManager {
 	
@@ -18,13 +13,15 @@ public class LevelManager {
 	private Level level;
 	private BufferedImage[] levelSprite;
 	private int lvlNum = 1;
-    private DrawCoin[] coins;
+    private Coins[] coins;
+    private Enemy[] enemies;
 	
 	public LevelManager(Game game) {
 		this.game = game;
 		importTileSprite();
 		level = new Level(LoadSave.getLevelData(lvlNum)); //number of tiles we have
         initializeCoins(); // Populate the coins array based on the level
+        initializeEnemies();
 	}
 
 	private void importTileSprite() {
@@ -51,51 +48,68 @@ public class LevelManager {
 		            x = 0;
 		        }
 		    }
-
-	 public void addEnemies(Graphics g) {
-			switch(lvlNum) { // create enemies for each map
-				case 1:
-					new EnemyTypeGhost((6-1) *TILE_SIZE, (14-1)*TILE_SIZE, 32, 32).drawCharacter(g);
-					new EnemyTypeGhost((13-1) *TILE_SIZE, (17-1)*TILE_SIZE, 32, 32).drawCharacter(g);
-					new EnemyTypeSnail((4-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32).drawCharacter(g);
-					new EnemyTypeSnail((9-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32).drawCharacter(g);
-					new EnemyTypeBee((20-1)*TILE_SIZE, (12-1)*TILE_SIZE, 32, 32).drawCharacter(g);
-					break;
-				case 2:
-					new EnemyTypeGhost(100, 100, 60, 60).drawCharacter(g);
-					break;
-				case 3:
-					break;
-			}
-		}
 	 
 	 // Loop through the coin array made below and draw them along with checking for player collision 
 	 public void addCoins(Graphics g) {
-			for (DrawCoin coin : coins) {
-	            coin.drawCharacter(g);
+			for (Coins coin : coins) {
+	            coin.drawCoin(g);
 	            if (coin.checkCollisionWithPlayer(game.getPlayer())) {
 	            	game.playSoundEffect(0);
 	            	game.increaseScore(10); // If the collision returns true add 10 to the score
 	            }
 	        }
 		}
+	 public void addEnemies(Graphics g) {
+			for (Enemy e : enemies) {
+	            e.drawCharacter(g);
+	            if (e.getHitbox().intersects(game.getPlayer().getHitbox())) {
+	            	game.getPlayer().respawn();
+	            }
+	        }
+		}
 	 
-	 // Initialize the array that will hold the coin objects 
-	 private void initializeCoins() {
+	 private void initializeEnemies() {
 	        switch (lvlNum) {
 	            case 1:
-	                coins = new DrawCoin[]{
-	                		new DrawCoin(5 *TILE_SIZE, 16 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-	                		new DrawCoin((10 - 1) * TILE_SIZE , (16 - 2) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-	                		new DrawCoin((14-1) * TILE_SIZE, (15-2) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-	                		new DrawCoin((18-1)*TILE_SIZE, (16-2)*TILE_SIZE, TILE_SIZE, TILE_SIZE),
-	                        // Add more coins as needed for level 1
+	                enemies = new Enemy[]{
+	                		new EnemyTypeGhost((6-1) *TILE_SIZE, (14-1)*TILE_SIZE, 32, 32),
+	    					new EnemyTypeGhost((13-1) *TILE_SIZE, (17-1)*TILE_SIZE, 32, 32),
+	    					new EnemyTypeSnail((4-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32),
+	    					new EnemyTypeSnail((9-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32),
+	    					new EnemyTypeBee((20-1)*TILE_SIZE, (12-1)*TILE_SIZE, 32, 32),
 	                };
 	                break;
-	            // Initialize coins for other levels similarly
+	            case 2:
+	            	enemies = new Enemy[]{
+	            			new EnemyTypeSnail((9-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32),
+	            			new EnemyTypeBee((20-1)*TILE_SIZE, (12-1)*TILE_SIZE, 32, 32),
+	                };
+	                break;
 	        }
-	    }
-		   
+	 }
+
+	 // Initialize the array that will hold the coin objects 
+	 private void initializeCoins() {
+		 switch (lvlNum) {
+	     	case 1:
+	     		coins = new Coins[]{
+	     				new Coins(5 *TILE_SIZE, 16 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                	new Coins((10 - 1) * TILE_SIZE , (16 - 2) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                	new Coins((14-1) * TILE_SIZE, (15-2) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                	new Coins((18-1)*TILE_SIZE, (16-2)*TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                    // Add more coins as needed for level 1
+	            };
+	            break;
+	     	case 2:
+	        	coins = new Coins[]{
+	        			new Coins(5 *TILE_SIZE, 16 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	        			new Coins((10 - 1) * TILE_SIZE , (16 - 2) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	        			// Add more coins as needed for level 2
+		    	};
+		    	break;
+	 	}
+	 }
+
 	public void update() {
 		
 	}

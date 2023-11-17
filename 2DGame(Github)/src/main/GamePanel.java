@@ -15,18 +15,13 @@ import static main.Game.GAME_HEIGHT;
 
 public class GamePanel extends JPanel { 
 	
-	//global vars 
 	private Game game;
-	//boolean isDraw = false;
 	
-	public GamePanel(Game game, GameWindow window) { // game panel constructor
+	public GamePanel(Game game) { // game panel constructor
 		this.game = game;
-	
-		
 		setPaneSize(); //calls the method to set window size
 		addKeyListener(new KeyboardInputs(game.getPlayer()));
-		
-		window.add(this);
+		game.getWindow().add(this);
 	}
 	
 	//method to set size of game window
@@ -39,15 +34,6 @@ public class GamePanel extends JPanel {
 	public void updateGame() {
 		
 	}
-	
-//	public void paintComponent(Graphics g) {
-//		super.paintComponent(g); 
-//
-//	    if (isDraw) {
-//	        game.render(g);
-//	    }
-//	
-//	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
