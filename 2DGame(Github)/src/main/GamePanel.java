@@ -1,6 +1,8 @@
 package main;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -50,7 +52,16 @@ public class GamePanel extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		game.render(g);
+		drawScore(g);
 	}
+	
+	// Display the score in the top left of the screen 
+	private void drawScore(Graphics g) {
+        int score = game.getScore();
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Arial", Font.BOLD, 20));
+        g.drawString("Score: " + score, 10, 30); // Adjust the position as needed
+    }
 	
 	public Game getGame() {
 		return game;

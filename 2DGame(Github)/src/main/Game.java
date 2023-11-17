@@ -42,7 +42,7 @@ public class Game implements Runnable{
 	private int maxTileOffset = WORLD_IN_WIDTH - TILES_IN_WIDTH; //entire map - visible game screen 
 	private int maxLevelOffsetX = maxTileOffset * TILE_SIZE;
 		
-	
+	private int score = 0;
 
 	private LevelManager levelManager;
 	private Player player;
@@ -59,7 +59,15 @@ public class Game implements Runnable{
 		startGameLoop();
 	}
 	
-	
+	// Get the score
+	public int getScore() {
+        return score;
+    }
+
+	// Update the score
+    public void increaseScore(int points) {
+        score += points;
+    }
 	
 	private void initializeClasses() {
 		levelManager = new LevelManager(this);
