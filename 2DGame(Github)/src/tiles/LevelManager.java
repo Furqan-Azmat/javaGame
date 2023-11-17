@@ -74,7 +74,8 @@ public class LevelManager {
 			for (DrawCoin coin : coins) {
 	            coin.drawCharacter(g);
 	            if (coin.checkCollisionWithPlayer(game.getPlayer())) {
-	                game.increaseScore(10); // If the collision returns true add 10 to the score
+	            	game.playSoundEffect(0);
+	            	game.increaseScore(10); // If the collision returns true add 10 to the score
 	            }
 	        }
 		}

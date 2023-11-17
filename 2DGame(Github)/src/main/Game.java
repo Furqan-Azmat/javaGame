@@ -7,6 +7,8 @@ import static main.Game.TILE_SIZE;
 import static main.Game.WORLD_IN_WIDTH;
 
 import java.awt.Graphics;
+
+import Sound.Sound;
 import entities.Player;
 import tiles.LevelManager;
 
@@ -46,15 +48,17 @@ public class Game implements Runnable{
 
 	private LevelManager levelManager;
 	private Player player;
+	private Sound sound;
 	
 	public Game(GameWindow window) { //game constructor
+		
 		
 		initializeClasses();
 		
 		gamePanel = new GamePanel(this, window); //gamepanel object
-		
+		sound = new Sound();
 		gamePanel.requestFocus(); //the inputs are focused to gamePanel
-		levelManager = new LevelManager(this);
+		
 		
 		startGameLoop();
 	}
@@ -73,6 +77,7 @@ public class Game implements Runnable{
 		levelManager = new LevelManager(this);
 		player = new Player((2-1) * TILE_SIZE,(19-1)*TILE_SIZE, (int) (16 * SCALE), (int) (16 * SCALE)); 
 		player.loadLvlData(levelManager.getCurrentLevel().getLevelData());		
+		
 	}
 
 	private void startGameLoop() {
@@ -167,10 +172,30 @@ public class Game implements Runnable{
 	public GameWindow getWindow() {
 		return gameWindow;
 	}
+	
 	public Player getPlayer() {
 		return player;
 	}
 	
+	public void playMusic(int soundIndex) {
+		
+		sound.loadSound(soundIndex);
+		sound.play();
+		sound.loop();
+		
+	}
+	
+	public void playSoundEffect(int soundIndex) {
+		
+		sound.loadSound(soundIndex);
+		sound.play();
+		
+	}
+	
+	public void stopMusic() {
+		
+		sound.stop();
+	}
 	
 
 	

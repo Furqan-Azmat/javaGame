@@ -17,7 +17,7 @@ public class DrawCoin extends Coins {
         if (isDisplayed) {
             BufferedImage coin = img.getSubimage(0, 0, 28, 26);
             g.drawImage(coin, (int) (x), (int) (y), width, height, null);
-            drawHitbox(g);
+            //drawHitbox(g);
         }
     }
 

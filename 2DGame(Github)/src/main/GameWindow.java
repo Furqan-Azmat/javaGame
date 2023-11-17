@@ -4,13 +4,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+import main.Game;
 
 public class GameWindow extends JFrame{
 	private JPanel menuPanel;
 	private JButton start, quit;
 	private ButtonHandler handler;
 	private GameWindow window;
+	private Game game;
 	public GameWindow() { 
+		game = new Game(this);
 		setTitle("This is a game");
 		setSize(1294,675); // CHANGE THE SIZE OF THE WINDOW TO SUIT THE GAME 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -19,6 +22,7 @@ public class GameWindow extends JFrame{
 		window = this;
 		handler = new ButtonHandler();
 		menu();
+		
 		setVisible(true); // makes the window visible (ADD EVERYTHING THAT WILL SHOW UP BEFORE THIS LINE)
 	}
 	
@@ -38,6 +42,7 @@ public class GameWindow extends JFrame{
 		quit.setPreferredSize(new Dimension(220, 90));
 		menuPanel.add(quit);
 		add(menuPanel); // add menu panel to the game window
+		game.playMusic(1);
 	}
 	
 	private class ButtonHandler implements ActionListener {
@@ -45,7 +50,9 @@ public class GameWindow extends JFrame{
 			if (e.getSource() == start) { 
 				System.out.println("starting game");
 				menuPanel.setVisible(false);
+				game.stopMusic();
 				new Game(window);
+				game.playMusic(2);
 			}
 			else if (e.getSource() == quit) { // close the program
 				dispose();
