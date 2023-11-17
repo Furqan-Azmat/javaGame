@@ -3,9 +3,9 @@ package entities;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class EnemyType1 extends Enemy {
+public class EnemyTypeGhost extends Enemy {
 
-	public EnemyType1(float x, float y, int width, int height) {
+	public EnemyTypeGhost(float x, float y, int width, int height) {
 		super(x, y, width, height);
 	}
 

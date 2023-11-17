@@ -5,9 +5,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import entities.DrawCoin;
-import entities.EnemyType1;
-import entities.EnemyType2;
-import entities.EnemyType3;
+import entities.EnemyTypeGhost;
+import entities.EnemyTypeSnail;
+import entities.EnemyTypeBee;
 import main.Game;
 import utils.LoadSave;
 
@@ -55,14 +55,14 @@ public class LevelManager {
 	 public void addEnemies(Graphics g) {
 			switch(lvlNum) { // create enemies for each map
 				case 1:
-					new EnemyType1(200, 576, 32, 32).drawCharacter(g);
-					new EnemyType1(400, 576, 32, 32).drawCharacter(g);
-					new EnemyType2(300, 300, 32, 32).drawCharacter(g);
-					new EnemyType2(560, 350, 32, 32).drawCharacter(g);
-					new EnemyType3(240, 476, 32, 32).drawCharacter(g);
+					new EnemyTypeGhost((6-1) *TILE_SIZE, (14-1)*TILE_SIZE, 32, 32).drawCharacter(g);
+					new EnemyTypeGhost((13-1) *TILE_SIZE, (17-1)*TILE_SIZE, 32, 32).drawCharacter(g);
+					new EnemyTypeSnail((4-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32).drawCharacter(g);
+					new EnemyTypeSnail((9-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32).drawCharacter(g);
+					new EnemyTypeBee((20-1)*TILE_SIZE, (12-1)*TILE_SIZE, 32, 32).drawCharacter(g);
 					break;
 				case 2:
-					new EnemyType1(100, 100, 60, 60).drawCharacter(g);
+					new EnemyTypeGhost(100, 100, 60, 60).drawCharacter(g);
 					break;
 				case 3:
 					break;
@@ -84,10 +84,10 @@ public class LevelManager {
 	        switch (lvlNum) {
 	            case 1:
 	                coins = new DrawCoin[]{
-	                		new DrawCoin(525, 576, 32, 32),
-	                		new DrawCoin(525, 544, 32, 32),
-	                		new DrawCoin(564, 576, 32, 32),
-	                		new DrawCoin(564, 544, 32, 32),
+	                		new DrawCoin(5 *TILE_SIZE, 16 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                		new DrawCoin((10 - 1) * TILE_SIZE , (16 - 2) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                		new DrawCoin((14-1) * TILE_SIZE, (15-2) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                		new DrawCoin((18-1)*TILE_SIZE, (16-2)*TILE_SIZE, TILE_SIZE, TILE_SIZE),
 	                        // Add more coins as needed for level 1
 	                };
 	                break;
