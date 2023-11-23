@@ -23,20 +23,7 @@ public class Game implements Runnable{
 	public final static int GAME_WIDTH = TILE_SIZE * TILES_IN_WIDTH;
 	public final static int GAME_HEIGHT = TILE_SIZE * TILES_IN_HEIGHT;
 	
-	//world size 
-	public final static int WORLD_IN_WIDTH = 40; // the number of tiles the entire map is in width
-	public final static int WORLD_IN_HEIGHT = 20; // game screen height and the entire map height is the same
-	public final static int WORLD_WIDTH = TILE_SIZE * WORLD_IN_WIDTH; 
-	public final static int WORLD_HEIGHT = TILE_SIZE * WORLD_IN_HEIGHT;
-	
-	
-	// variables to handle longer levels 
-	private int xLevelOffset;
-	private int leftBorder = (int) (0.2 * GAME_WIDTH); // 20% of the game screen to the left
-	private int rightBorder = (int) (0.8 * GAME_WIDTH); // 20% of the game screen to the right 
-	//private int levelTileWidth = WORLD_IN_WIDTH; // number of tiles the map is in width 
-	private int maxTileOffset = WORLD_IN_WIDTH - TILES_IN_WIDTH; //entire map - visible game screen 
-	private int maxLevelOffsetX = maxTileOffset * TILE_SIZE;
+
 		
 	private int score = 0;
     private int lvlNum = 1; // Add this line to declare lvlNum
@@ -53,6 +40,7 @@ public class Game implements Runnable{
 		gamePanel.requestFocus(); //the inputs are focused to gamePanel
 		startGameLoop();
 		levelManager = new LevelManager(this);
+		
 	}
 	
     public int getLevelNumber() {
@@ -100,28 +88,8 @@ public class Game implements Runnable{
 	private void update() {
 		levelManager.update();
 		player.update();
-		checkIfPlayerCloseToBorder();
 	} 
-	
-	private void checkIfPlayerCloseToBorder() {
-		
-		int playerX = (int) player.getHitbox().x;
-		int difference = playerX - xLevelOffset;
-		
-		if (difference > rightBorder) {
-			xLevelOffset += difference - rightBorder;
-		}
-		else if(difference < leftBorder) {
-			xLevelOffset += difference - leftBorder;
-		}
-		
-		if(xLevelOffset > maxLevelOffsetX) {
-			xLevelOffset = maxLevelOffsetX;
-		}
-		else if(xLevelOffset < 0) {
-			xLevelOffset = 0;
-		}
-	}
+
 
 	public void render(Graphics g) {	
 		levelManager.draw(g);

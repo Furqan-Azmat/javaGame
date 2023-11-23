@@ -5,7 +5,7 @@ import static main.Game.TILES_IN_HEIGHT;
 import static main.Game.TILES_IN_WIDTH;
 import static main.Game.GAME_HEIGHT;
 import static main.Game.TILE_SIZE;
-import static main.Game.WORLD_WIDTH;
+
 
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
@@ -30,7 +30,7 @@ public class HelperMethods {
 
 	private static boolean IsSolid(float x, float y, int[][] lvlData) {
 		
-		if(x < 0 || x >= WORLD_WIDTH) //if x position is outside the entire game map width
+		if(x < 0 || x >= GAME_WIDTH) //if x position is outside the entire game map width
 			return true; // it is solid 
 		if(y < 0 || y >= GAME_HEIGHT)// if y position is outside the game height 
 			return true; //it is solid 
@@ -43,7 +43,7 @@ public class HelperMethods {
 		
 		for (int r = 0; r < TILES_IN_HEIGHT; r++) {
             //for (int c = 0; c < TILES_IN_WIDTH; c++) {
-			for (int c = 0; c < Game.WORLD_IN_WIDTH; c++) {
+			for (int c = 0; c < Game.TILES_IN_WIDTH; c++) {
             	//levelOne.getSpriteIndex(r, c);
             	value = lvlData[(int) xIndex ][(int) yIndex];
             	if (value == 0)

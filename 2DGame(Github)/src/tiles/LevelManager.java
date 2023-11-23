@@ -41,7 +41,7 @@ public class LevelManager {
 		for(int j = 0; j < 1; j++) //height of tile sprite
 			for(int i = 0; i < 2; i++) { //width of tile sprite
 				int index = j*2 + i;
-				levelSprite[index] = img.getSubimage(i * 16, j * 16, 16, 16); // 32 - size of tile
+				levelSprite[index] = img.getSubimage(i * 16, j * 16, 16, 16); // 16 - size of tile
 			}
 	}
 
@@ -50,7 +50,7 @@ public class LevelManager {
 		    int y = 0;
 		    int tileNum;
 		        for (int r = 0; r < Game.TILES_IN_HEIGHT; r++) {
-		            for (int c = 0; c < Game.WORLD_IN_WIDTH; c++) {
+		            for (int c = 0; c < Game.TILES_IN_WIDTH; c++) {
 		                tileNum = level.getSpriteIndex(r, c);
 		                g.drawImage(levelSprite[tileNum], x, y, TILE_SIZE ,TILE_SIZE, null);
 		                x += TILE_SIZE;
