@@ -124,10 +124,10 @@ public class Game implements Runnable{
 	}
 
 	public void render(Graphics g) {	
-		levelManager.draw(g, xLevelOffset);
+		levelManager.draw(g);
 		levelManager.addEnemies(g);
 		levelManager.addCoins(g);
-		player.render(g, xLevelOffset);
+		player.render(g);
 	}
 	
 	@Override

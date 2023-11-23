@@ -45,14 +45,14 @@ public class LevelManager {
 			}
 	}
 
-	 public void draw(Graphics g, int lvlOffset) {
+	 public void draw(Graphics g) {
 		    int x = 0;
 		    int y = 0;
 		    int tileNum;
 		        for (int r = 0; r < Game.TILES_IN_HEIGHT; r++) {
 		            for (int c = 0; c < Game.WORLD_IN_WIDTH; c++) {
 		                tileNum = level.getSpriteIndex(r, c);
-		                g.drawImage(levelSprite[tileNum], x, y, TILE_SIZE - lvlOffset,TILE_SIZE, null);
+		                g.drawImage(levelSprite[tileNum], x, y, TILE_SIZE ,TILE_SIZE, null);
 		                x += TILE_SIZE;
 		            }
 		            y += TILE_SIZE;

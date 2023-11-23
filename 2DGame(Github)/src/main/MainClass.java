@@ -1,7 +1,12 @@
 package main;
+
+import javax.swing.SwingUtilities;
+
 public class MainClass {
 	public static void main(String[] args) {
-		new GameWindow();
+		 SwingUtilities.invokeLater(() -> {
+		        new GameWindow();
+		    });
 
 
 	}	
