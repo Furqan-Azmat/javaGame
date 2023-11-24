@@ -75,25 +75,16 @@ public class GameWindow extends JFrame{
 		quit = new JButton(new ImageIcon("res/quit.png"));
 		quit.setRolloverIcon(new ImageIcon("res/hoverquit.png"));
 
-//		start = new JButton("Start");
-//		quit = new JButton("quit");
+
 		
-		// create a label for game title 
-		//JLabel gameTitle = new JLabel("THIS IS A GAME");
-		//gameTitle.setFont(new Font("Serif", Font.BOLD, 40));
+		menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 500, 50));
+		menuPanel.setBounds(390, 0, 500, 500);
+		menuPanel.setOpaque(false);
 		
+	    start.setPreferredSize(new Dimension(220, 90));
+	    quit.setPreferredSize(new Dimension(220, 90));
 		
-		menuPanel = new JPanel(null);
-		menuPanel.setBounds(0, 0, 220, 180);
-		
-		//menuPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-		//menuPanel.add(gameTitle);
-		
-//		start.setPreferredSize(new Dimension(220, 90));
-//		quit.setPreferredSize(new Dimension(220, 90));
-		
-		start.setBounds(0, 0, 220, 90);
-        quit.setBounds(0, 90, 220, 90);
+
 		
 		start.addActionListener(handler);
 		quit.addActionListener(handler);
@@ -120,8 +111,7 @@ public class GameWindow extends JFrame{
 				game.playMusic(2);
 			}
 			else if (e.getSource() == quit) { // close the program
-				dispose();
-				
+				System.exit(0);
 				
 			}
 		}
