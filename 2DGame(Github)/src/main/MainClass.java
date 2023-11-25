@@ -8,7 +8,6 @@ public class MainClass {
 		        new GameWindow();
 		    });
 		 	
-		 int a = 3;
 
 	}	
 
