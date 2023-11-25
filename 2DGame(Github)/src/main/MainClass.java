@@ -7,7 +7,8 @@ public class MainClass {
 		 SwingUtilities.invokeLater(() -> {
 		        new GameWindow();
 		    });
-
+		 	
+		 int a = 3;
 
 	}	
 

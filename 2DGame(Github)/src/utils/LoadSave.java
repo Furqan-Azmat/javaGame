@@ -42,7 +42,7 @@ public class LoadSave {
 		case 3:
 			fileName = "res/map_3.txt";
 		}
-		int[][] lvlData = new int[Game.WORLD_IN_WIDTH][TILES_IN_HEIGHT];
+		int[][] lvlData = new int[Game.TILES_IN_WIDTH][TILES_IN_HEIGHT];
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(fileName));
 			String line;
@@ -50,7 +50,7 @@ public class LoadSave {
             for (int r = 0; r < TILES_IN_HEIGHT; r++) {
                 line = in.readLine();
                 String numbers[] = line.split(" ");
-                for (int c = 0; c < Game.WORLD_IN_WIDTH; c++) {
+                for (int c = 0; c < Game.TILES_IN_WIDTH; c++) {
                     num = Integer.parseInt(numbers[c]);
                     lvlData[c][r] = num; //map numbers stored in array
                 }
