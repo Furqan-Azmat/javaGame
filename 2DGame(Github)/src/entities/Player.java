@@ -143,14 +143,32 @@ public class Player extends Entity{
 	}
 
 	//method to load the player sprite and the frames of the sprite into an array
-	private void loadAnimation() {
-			BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYERATLAS);	
-			animation = new BufferedImage[3][3]; //size of the sprite
-			for (int i = 0; i < animation.length; i++)
-			for(int j = 0; j < animation[i].length; j++)
-				animation[i][j] = img.getSubimage(j*16, i*16, 16, 16); //16 is the size of each 'frame' is the sprite
+	private void loadAnimation() {	
+		BufferedImage img;
+	    if (LoadSave.getPlayerAtlas().equals(LoadSave.PLAYERATLAS)) {
+	        img = LoadSave.GetSpriteAtlas(LoadSave.PLAYERATLAS);
+	    } else {
+	        img = LoadSave.GetSpriteAtlas(LoadSave.PLAYERATLAS2);
+	    }
+
+	    animation = new BufferedImage[3][3]; //size of the sprite
+	    for (int i = 0; i < animation.length; i++)
+	        for (int j = 0; j < animation[i].length; j++)
+	            animation[i][j] = img.getSubimage(j * 16, i * 16, 16, 16); 
+	}
+		
+	
+	
+	
+	public void reloadAnimation() {
+		
+		loadAnimation();
+		
+		
+		
 	}
 	
+
 	public void loadLvlData(int[][] lvlData) {
 		this.lvlData = lvlData;
 		if(!IsEntityOnFloor(hitbox, lvlData))

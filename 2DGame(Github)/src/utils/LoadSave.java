@@ -13,10 +13,17 @@ import javax.imageio.ImageIO;
 import main.Game;
 
 public class LoadSave {
-	public static final String PLAYERATLAS = "player.png";
+	
+	private static String selectedCharacter = "";
+	
+	public static final String PLAYERATLAS = "player.png"; //finn atlas
+	public static final String PLAYERATLAS2 = "player2.png"; //fionna atlas
 	public static final String LEVELATLAS = "tile_final.png";
 	public static final String ENEMYATLAS = "enemySprite.png";
 	public static final String COINATLAS = "Coin1.png";
+
+	
+	
 	public static BufferedImage GetSpriteAtlas(String SpriteFileName) {
 		BufferedImage img = null;
 		InputStream in = LoadSave.class.getResourceAsStream("/" + SpriteFileName);
@@ -60,4 +67,24 @@ public class LoadSave {
 		}
 		return lvlData;
 	}
+
+	public static String getPlayerAtlas() {
+		switch (selectedCharacter) {
+        
+		case "finn":
+            return PLAYERATLAS;
+            
+        case "fionna":
+            return PLAYERATLAS2;
+            
+    }
+		return selectedCharacter;
+		 
+		
+	}
+	
+	public static boolean setSelectedCharacter(String character) {
+        selectedCharacter = character;
+		return true;
+    }
 }

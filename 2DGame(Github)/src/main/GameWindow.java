@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import utils.LoadSave;
+
 public class GameWindow extends JFrame{
 	
 	private JPanel menuPanel;
@@ -28,7 +30,7 @@ public class GameWindow extends JFrame{
 		
 		game = new Game(this);
 		
-        URL resourceUrl = this.getClass().getResource("background1.png");
+        URL resourceUrl = this.getClass().getResource("background.png");
         if (resourceUrl == null) {
             System.err.println("Error loading background image. Resource not found.");
         } else {
@@ -39,11 +41,15 @@ public class GameWindow extends JFrame{
 		backgroundLabel = new JLabel(backgroundIcon);
 		backgroundLabel.setSize(1294,675);
 		
+		ImageIcon image = new ImageIcon("res/logo.png");
+		
 		setTitle("This is a game");
 		setSize(1294,675); // CHANGE THE SIZE OF THE WINDOW TO SUIT THE GAME 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); //runs the window center of the screen
 		setResizable(false);
+		setIconImage(image.getImage());
+		
 		
         layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(1294, 675));
@@ -53,6 +59,7 @@ public class GameWindow extends JFrame{
 		
 		layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
 	    layeredPane.add(menuPanel, JLayeredPane.PALETTE_LAYER);
+	    
 
 		
         add(layeredPane);
@@ -99,6 +106,11 @@ public class GameWindow extends JFrame{
 		game.playMusic(1);
 	}
 	
+	public void hideMenuPanel() {
+		menuPanel.setVisible(false);
+		backgroundLabel.setVisible(false);
+		
+	}
 	
 	
 	private class ButtonHandler implements ActionListener {
@@ -107,7 +119,9 @@ public class GameWindow extends JFrame{
 				System.out.println("starting game");
 				menuPanel.setVisible(false);
 				game.stopMusic();
-				new Game(window);
+				//new Game(window);
+				CharacterSelection charSelection = new CharacterSelection(GameWindow.this);
+				charSelection.setVisible(true);
 				game.playMusic(2);
 			}
 			else if (e.getSource() == quit) { // close the program
