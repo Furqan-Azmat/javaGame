@@ -29,6 +29,7 @@ public class LevelManager {
         level = new Level(LoadSave.getLevelData(lvlNum));
         initializeCoins();
         initializeEnemies();
+        game.getPlayer().respawn();
     }
     
     public int getLevelNumber() {
@@ -104,10 +105,11 @@ public class LevelManager {
 		 switch (lvlNum) {
 	     	case 1:
 	     		coins = new Coins[]{
-	     				new Coins(5 *TILE_SIZE, 16 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-	                	new Coins((10 - 1) * TILE_SIZE , (16 - 2) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-	                	new Coins((14-1) * TILE_SIZE, (15-2) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-	                	new Coins((18-1)*TILE_SIZE, (16-2)*TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	     				new Coins(15 * TILE_SIZE, 3 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	     				new Coins(5 *TILE_SIZE, 2 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                	new Coins(38 * TILE_SIZE , 18 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                	new Coins(38 * TILE_SIZE, 1   * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                	new Coins(25 * TILE_SIZE, 15 *TILE_SIZE, TILE_SIZE, TILE_SIZE),
 	                    // Add more coins as needed for level 1
 	            };
 	            break;

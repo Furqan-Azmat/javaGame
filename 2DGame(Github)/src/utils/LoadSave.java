@@ -2,7 +2,6 @@ package utils;
 
 import static main.Game.TILES_IN_HEIGHT;
 import static main.Game.TILES_IN_WIDTH;
-
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -42,7 +41,7 @@ public class LoadSave {
 		case 3:
 			fileName = "res/map_3.txt";
 		}
-		int[][] lvlData = new int[Game.TILES_IN_WIDTH][TILES_IN_HEIGHT];
+		int[][] lvlData = new int[TILES_IN_WIDTH][TILES_IN_HEIGHT];
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(fileName));
 			String line;

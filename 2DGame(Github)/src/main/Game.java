@@ -48,7 +48,7 @@ public class Game implements Runnable{
     }
 	public void increaseScore(int points) {
         score += points;
-        if (score >= 40) {
+        if (score >= 50) {
             // Reset the score
             score = 0;
 
