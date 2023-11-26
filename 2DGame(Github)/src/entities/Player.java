@@ -30,7 +30,7 @@ public class Player extends Entity{
 	// jumping / gravity 
 	private float airSpeed = 0f; // the speed at which we are traveling through the air, jumping and falling 
 	private float gravity = 0.01f * SCALE; // the speed at which the player fall back down  
-	private float jumpSpeed = -0.75f * SCALE; // jumping up in y direction 
+	private float jumpSpeed = -0.8f * SCALE; // jumping up in y direction 
 	private float fallSpeedAfterCollision = 0.5f * SCALE; // in case the player is hitting the roof
 	private boolean inAir = false; // is player in air 
 
@@ -81,40 +81,44 @@ public class Player extends Entity{
 	
 	private void updatePlayerPosition() {
 		moving = false;
-		if(jump)
-			jump();
-		if(!left && !right && !inAir)
-			return;
-		float xSpeed = 0;
-		if(left )  // if character is moving left 
-			xSpeed -= playerSpeed;
-		if (right ) // if character is moving right 
-			xSpeed += playerSpeed; 
-		if(!inAir) {
-			if(!IsEntityOnFloor(hitbox, lvlData)) {
-				inAir = true;
-			}
-		}
-		if(inAir) { //need to check both x and y direction 
-			if(CanMoveHere(hitbox.x + xSpeed, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
-				hitbox.y += airSpeed;
-				airSpeed += gravity;
-				updateXPosition(xSpeed);
-			}	
-			else {
-				hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, airSpeed);
-				if(airSpeed > 0)
-					resetInair();
-				else {
-					airSpeed = fallSpeedAfterCollision;
-					updateXPosition(xSpeed);
-				}
-			}
-		}
-		else { // if not in air, only need to check x direction 
-			updateXPosition(xSpeed);
-		}
-		moving = true;
+
+	    float xSpeed = 0;
+	    if (left)
+	        xSpeed -= playerSpeed;
+	    if (right)
+	        xSpeed += playerSpeed;
+
+	    updateXPosition(xSpeed);
+
+	    if (jump)
+	        jump();
+
+	    if (!left && !right && !inAir)
+	        return;
+
+	    if (!inAir) {
+	        if (!IsEntityOnFloor(hitbox, lvlData)) {
+	            inAir = true;
+	        }
+	    }
+
+	    if (inAir) {
+	        // Handle Y-axis movement and collisions
+	        float ySpeed = airSpeed + gravity;
+	        if (CanMoveHere(hitbox.x, hitbox.y + ySpeed, hitbox.width, hitbox.height, lvlData)) {
+	            hitbox.y += ySpeed;
+	            airSpeed += gravity;
+	        } else {
+	            hitbox.y = GetEntityYPosUnderRoofOrAboveFloor(hitbox, airSpeed);
+	            if (airSpeed > 0)
+	                resetInair();
+	            else {
+	                airSpeed = fallSpeedAfterCollision;
+	            }
+	        }
+	    }
+
+	    moving = true;
 	}
 
 	private void jump() {
@@ -130,12 +134,12 @@ public class Player extends Entity{
 	}
 
 	private void updateXPosition(float xSpeed) {
-		if(CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
-			hitbox.x += xSpeed;
-		}
-		else {
-			hitbox.x = GetEntityPosNextToWall(hitbox, xSpeed);
-		}
+		if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
+	        hitbox.x += xSpeed;
+	    } else {
+	        // Handle collision with wall
+	        hitbox.x = GetEntityPosNextToWall(hitbox, xSpeed);
+	    }
 	}
 
 	//method to load the player sprite and the frames of the sprite into an array
