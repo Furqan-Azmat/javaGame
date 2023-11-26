@@ -30,6 +30,7 @@ public class LevelManager {
         initializeCoins();
         initializeEnemies();
         game.getPlayer().respawn();
+        game.getPlayer().loadLvlData(level.getLevelData());
     }
     
     public int getLevelNumber() {
@@ -47,6 +48,10 @@ public class LevelManager {
 	}
 
 	 public void draw(Graphics g) {
+		 switch (lvlNum) {
+		 case 1:
+			 
+		 }
 		    int x = 0;
 		    int y = 0;
 		    int tileNum;
@@ -86,8 +91,8 @@ public class LevelManager {
 	                enemies = new Enemy[]{
 	                		new EnemyTypeGhost((6-1) *TILE_SIZE, (14-1)*TILE_SIZE, 32, 32),
 	    					new EnemyTypeGhost((13-1) *TILE_SIZE, (17-1)*TILE_SIZE, 32, 32),
-	    					new EnemyTypeSnail((4-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32),
-	    					new EnemyTypeSnail((9-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32),
+	    					//new EnemyTypeSnail((4-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32),
+	    					//new EnemyTypeSnail((9-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32),
 	    					new EnemyTypeBee((20-1)*TILE_SIZE, (12-1)*TILE_SIZE, 32, 32),
 	                };
 	                break;
@@ -109,7 +114,9 @@ public class LevelManager {
 	     				new Coins(5 *TILE_SIZE, 2 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 	                	new Coins(38 * TILE_SIZE , 18 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 	                	new Coins(38 * TILE_SIZE, 1   * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                	
 	                	new Coins(25 * TILE_SIZE, 15 *TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	                	new Coins(6 * TILE_SIZE, 18 *TILE_SIZE, TILE_SIZE, TILE_SIZE),
 	                    // Add more coins as needed for level 1
 	            };
 	            break;

@@ -24,8 +24,8 @@ public class Player extends Entity{
 	private boolean left, up, right, down, jump; //wasd and jump
 	private float playerSpeed = 0.5f * SCALE; // how fast the character moves 
 	private int[][] lvlData;
-	private float xDrawOffset = 5 * Game.SCALE;
-	private float yDrawOffset = 1 * Game.SCALE;
+	private float xDrawOffset = 1 * Game.SCALE;
+	private float yDrawOffset = 0 * Game.SCALE;
 	
 	// jumping / gravity 
 	private float airSpeed = 0f; // the speed at which we are traveling through the air, jumping and falling 
@@ -37,7 +37,7 @@ public class Player extends Entity{
 	public Player(float x, float y, int width, int height) { //player constructor 
 		super(x, y, width, height);
 		loadAnimation();
-		initializeHitbox(x, y, (int) (7 * SCALE),(int) (14 * SCALE)); //size of hitbox 	
+		initializeHitbox(x, y, (int) (14 * SCALE),(int) (15 * SCALE)); //size of hitbox 	
 	}
 
 	public void update() {

@@ -28,7 +28,7 @@ public class GameWindow extends JFrame{
 		
 		game = new Game(this);
 		
-        URL resourceUrl = this.getClass().getResource("background1294x680.png");
+        URL resourceUrl = this.getClass().getResource("background1.png");
         if (resourceUrl == null) {
             System.err.println("Error loading background image. Resource not found.");
         } else {
@@ -78,7 +78,7 @@ public class GameWindow extends JFrame{
 
 		
 		menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 500, 50));
-		menuPanel.setBounds(390, 0, 500, 500);
+		menuPanel.setBounds(-50, 50, 500, 500);
 		menuPanel.setOpaque(false);
 		
 	    start.setPreferredSize(new Dimension(220, 90));
