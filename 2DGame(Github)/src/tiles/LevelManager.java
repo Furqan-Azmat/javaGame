@@ -80,6 +80,7 @@ public class LevelManager {
 			for (Enemy e : enemies) {
 	            e.drawCharacter(g);
 	            if (e.getHitbox().intersects(game.getPlayer().getHitbox())) {
+	            	game.playSoundEffect(3);
 	            	game.getPlayer().respawn();
 	            }
 	        }
@@ -90,7 +91,7 @@ public class LevelManager {
 	            case 1:
 	                enemies = new Enemy[]{
 	                		new EnemyTypeGhost((6-1) *TILE_SIZE, (14-1)*TILE_SIZE, 32, 32),
-	    					new EnemyTypeGhost((13-1) *TILE_SIZE, (17-1)*TILE_SIZE, 32, 32),
+	    					//new EnemyTypeGhost((13-1) *TILE_SIZE, (17-1)*TILE_SIZE, 32, 32),
 	    					//new EnemyTypeSnail((4-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32),
 	    					//new EnemyTypeSnail((9-1)*TILE_SIZE, (19-1)*TILE_SIZE, 32, 32),
 	    					new EnemyTypeBee((20-1)*TILE_SIZE, (12-1)*TILE_SIZE, 32, 32),

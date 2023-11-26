@@ -156,6 +156,7 @@ public class Player extends Entity{
 		if(!IsEntityOnFloor(hitbox, lvlData))
 			inAir = true;
 	}
+	
 	public void respawn() {
 		hitbox.x = 32f;
 		hitbox.y = 576f;

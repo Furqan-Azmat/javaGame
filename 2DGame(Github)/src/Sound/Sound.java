@@ -19,6 +19,7 @@ public class Sound {
 		soundURL[0] = getClass().getResource("coin.wav");
 		soundURL[1] = getClass().getResource("menu.wav");
 		soundURL[2] = getClass().getResource("Nintendub.wav");
+		soundURL[3] = getClass().getResource("lost.wav");
 	}
 	
 	public void loadSound(int soundIndex) {
