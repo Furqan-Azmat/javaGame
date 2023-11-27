@@ -142,7 +142,7 @@ public class LevelManager {
 	        			new Coins(4 * TILE_SIZE , 2 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 	        			new Coins(17 * TILE_SIZE , 2 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 	        			new Coins(37* TILE_SIZE , 14 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-	        			new Coins(37 * TILE_SIZE , 5 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+	        			new Coins(38 * TILE_SIZE , 5 * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 		    	};
 	     		break;
 	 	}
