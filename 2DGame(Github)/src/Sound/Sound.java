@@ -6,10 +6,6 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-//\res\sound\coin.wav
-
-// \res\audio\coin.wav
-
 public class Sound {
 	
 	Clip clip; //store the sound file
@@ -29,27 +25,20 @@ public class Sound {
 	        clip = AudioSystem.getClip();
 	        clip.open(audio);
 	    } catch (Exception e) {
-	        e.printStackTrace();
 	        System.out.println("Error loading sound clip");
 	    }
 	}
 
 	public void play() {
-		
 		clip.start();
-		
 	}
 	
 	public void loop() {
-
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
-		
 	}
 	
 	public void stop() {
-		
 		clip.stop();
-		
 	}
 	
 	

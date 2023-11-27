@@ -7,7 +7,6 @@ public class Constants {
 		public static final int UP = 1;
 		public static final int RIGHT = 2;
 		public static final int DOWN = 3;
-
 	}
 	
 	public static class PlayerConstants{
@@ -17,23 +16,16 @@ public class Constants {
 		
 		//method to return the number of frames each animation action has
 		public static int GetSpriteAmount(int playerAction) {
-			
 			switch(playerAction) {
-			
 			case IDLE:
-			return 3;
-			
+				return 3;
 			case RUNNING:
 				return 2;
-				
 			case HIT:
 				return 2;
-				
 			default:
 				return 1;
 			}	
 		}
-		
 	}
-	
 }

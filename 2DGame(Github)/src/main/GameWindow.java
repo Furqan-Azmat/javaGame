@@ -6,14 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-
-import utils.LoadSave;
+import javax.swing.*;
 
 public class GameWindow extends JFrame{
 	
@@ -27,7 +20,6 @@ public class GameWindow extends JFrame{
 	private JLabel backgroundLabel;
 	
 	public GameWindow() { 
-		
 		game = new Game(this);
 		
         URL resourceUrl = this.getClass().getResource("background.png");
@@ -37,19 +29,17 @@ public class GameWindow extends JFrame{
             backgroundIcon = new ImageIcon(resourceUrl);
         }
 		
-	        
 		backgroundLabel = new JLabel(backgroundIcon);
 		backgroundLabel.setSize(1294,675);
 		
 		ImageIcon image = new ImageIcon("res/logo.png");
 		
-		setTitle("This is a game");
-		setSize(1294,675); // CHANGE THE SIZE OF THE WINDOW TO SUIT THE GAME 
+		setTitle("2D JAVA GAME");
+		setSize(1294,675);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null); //runs the window center of the screen
 		setResizable(false);
 		setIconImage(image.getImage());
-		
 		
         layeredPane = new JLayeredPane();
         layeredPane.setPreferredSize(new Dimension(1294, 675));
@@ -59,20 +49,11 @@ public class GameWindow extends JFrame{
 		
 		layeredPane.add(backgroundLabel, JLayeredPane.DEFAULT_LAYER);
 	    layeredPane.add(menuPanel, JLayeredPane.PALETTE_LAYER);
-	    
-
-		
         add(layeredPane);
 		
 		window = this;
-		
-		
 		setVisible(true); // makes the window visible (ADD EVERYTHING THAT WILL SHOW UP BEFORE THIS LINE)
-	
-	
 	}
-	
-
 	
 	public void menu() {
 		// create buttons with images for starting and quitting the game
@@ -81,9 +62,6 @@ public class GameWindow extends JFrame{
 		start.setRolloverIcon(new ImageIcon("res/hoverstart.png"));
 		quit = new JButton(new ImageIcon("res/quit.png"));
 		quit.setRolloverIcon(new ImageIcon("res/hoverquit.png"));
-
-
-		
 		menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 500, 50));
 		menuPanel.setBounds(-50, 50, 500, 500);
 		menuPanel.setOpaque(false);
@@ -91,27 +69,20 @@ public class GameWindow extends JFrame{
 	    start.setPreferredSize(new Dimension(220, 90));
 	    quit.setPreferredSize(new Dimension(220, 90));
 		
-
-		
 		start.addActionListener(handler);
 		quit.addActionListener(handler);
 		
 		menuPanel.add(start);
 		menuPanel.add(quit);
 		
-		
-		
 		this.add(menuPanel); // add menu panel to the game window
-		
 		game.playMusic(1);
 	}
 	
 	public void hideMenuPanel() {
 		menuPanel.setVisible(false);
 		backgroundLabel.setVisible(false);
-		
 	}
-	
 	
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -119,14 +90,13 @@ public class GameWindow extends JFrame{
 				System.out.println("starting game");
 				menuPanel.setVisible(false);
 				game.stopMusic();
-				//new Game(window);
+				
 				CharacterSelection charSelection = new CharacterSelection(GameWindow.this);
 				charSelection.setVisible(true);
 				game.playMusic(2);
 			}
 			else if (e.getSource() == quit) { // close the program
 				System.exit(0);
-				
 			}
 		}
 	}

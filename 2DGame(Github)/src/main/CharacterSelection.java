@@ -16,12 +16,11 @@ public class CharacterSelection extends JFrame implements ActionListener {
     private JButton finn, fionna;
     private JPanel panel;
     private GameWindow window;
-    
 
     public CharacterSelection(GameWindow window) {
     	this.window = window;
     	
-        this.setTitle("My Frame");
+        this.setTitle("2D JAVA GAME");
         this.setSize(1294, 675);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -29,11 +28,8 @@ public class CharacterSelection extends JFrame implements ActionListener {
 
         // Initialize the buttons and set up the character selection
         selectYourCharacter();
-
         // Add the panel to the frame
         this.add(panel);
-        
-
         this.setVisible(true);
     }
 
@@ -72,19 +68,6 @@ public class CharacterSelection extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-    	
-//    	if(e.getSource() == finn) {
-//    		LoadSave.setSelectedCharacter("finn");
-//    		window.hideMenuPanel();
-//    		
-//    		new Game(window);
-//    	}
-//    	
-//    	else if(e.getSource() == fionna) {
-//    		LoadSave.setSelectedCharacter("fionna");
-//    		window.hideMenuPanel();
-//    		new Game(window);
-//    	}
     	if (e.getSource() == finn) {
             LoadSave.setSelectedCharacter("finn");
             window.hideMenuPanel();
@@ -94,12 +77,9 @@ public class CharacterSelection extends JFrame implements ActionListener {
             window.hideMenuPanel();
             new Game(window).getPlayer().reloadAnimation();
         }
-
-    	
+    	dispose(); // close character selection window 
     }
     
- 
-
 }
     
     

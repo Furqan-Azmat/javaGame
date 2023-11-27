@@ -12,7 +12,6 @@ import inputs.KeyboardInputs;
 import static main.Game.GAME_WIDTH;
 import static main.Game.GAME_HEIGHT;
 
-
 public class GamePanel extends JPanel { 
 	
 	private Game game;

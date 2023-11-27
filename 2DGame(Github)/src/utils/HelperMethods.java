@@ -5,17 +5,7 @@ import static main.Game.TILES_IN_HEIGHT;
 import static main.Game.TILES_IN_WIDTH;
 import static main.Game.GAME_HEIGHT;
 import static main.Game.TILE_SIZE;
-
-
-import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
-import main.Game;
-
-
 
 public class HelperMethods {
 	
@@ -43,19 +33,14 @@ public class HelperMethods {
 		
 		for (int r = 0; r < TILES_IN_HEIGHT; r++) {
             //for (int c = 0; c < TILES_IN_WIDTH; c++) {
-			for (int c = 0; c < Game.TILES_IN_WIDTH; c++) {
+			for (int c = 0; c < TILES_IN_WIDTH; c++) {
             	//levelOne.getSpriteIndex(r, c);
             	value = lvlData[(int) xIndex ][(int) yIndex];
             	if (value == 0)
        			return true;
             }
 		}
-		return false;
-		
-//		if (value == 0)
-//			return true;
-//		return false;
-//			
+		return false;		
 	}
 	
 	public static float GetEntityPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
@@ -91,11 +76,6 @@ public class HelperMethods {
 		if(!IsSolid(hitbox.x, hitbox.y + hitbox.height +1, lvlData)) //bottom left
 			if(!IsSolid(hitbox.x + hitbox.width, hitbox.y + hitbox.height +1, lvlData)) // bottom right 
 				return false;
-		return true;
-			
+		return true;	
 	}
-	
-	
-	
-	
 }

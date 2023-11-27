@@ -22,8 +22,6 @@ public class Game implements Runnable{
 	public final static int TILE_SIZE = (int) (DEFAULT_TILE_SIZE * SCALE);
 	public final static int GAME_WIDTH = TILE_SIZE * TILES_IN_WIDTH;
 	public final static int GAME_HEIGHT = TILE_SIZE * TILES_IN_HEIGHT;
-	
-
 		
 	private int score = 0;
     private int lvlNum = 1; // Add this line to declare lvlNum
@@ -40,7 +38,6 @@ public class Game implements Runnable{
 		gamePanel.requestFocus(); //the inputs are focused to gamePanel
 		startGameLoop();
 		levelManager = new LevelManager(this);
-		
 	}
 	
     public int getLevelNumber() {
@@ -48,7 +45,7 @@ public class Game implements Runnable{
     }
 	public void increaseScore(int points) {
         score += points;
-        if (score >= 10) {
+        if (score >= 50) {
             // Reset the score
             score = 0;
 
@@ -73,7 +70,6 @@ public class Game implements Runnable{
         return score;
     }
 
-	
 	private void initializeClasses() {
 		levelManager = new LevelManager(this);
 		player = new Player((2-1) * TILE_SIZE,(19-1)*TILE_SIZE, (int) (16 * SCALE), (int) (16 * SCALE)); 
@@ -89,7 +85,6 @@ public class Game implements Runnable{
 		levelManager.update();
 		player.update();
 	} 
-
 
 	public void render(Graphics g) {	
 		levelManager.draw(g);
@@ -157,8 +152,4 @@ public class Game implements Runnable{
 	public void stopMusic() {
 		sound.stop();
 	}
-	
-
-	
-
 }

@@ -22,8 +22,6 @@ public class LoadSave {
 	public static final String ENEMYATLAS = "enemySprite.png";
 	public static final String COINATLAS = "Coin1.png";
 
-	
-	
 	public static BufferedImage GetSpriteAtlas(String SpriteFileName) {
 		BufferedImage img = null;
 		InputStream in = LoadSave.class.getResourceAsStream("/" + SpriteFileName);
@@ -76,11 +74,8 @@ public class LoadSave {
             
         case "fionna":
             return PLAYERATLAS2;
-            
-    }
+		}
 		return selectedCharacter;
-		 
-		
 	}
 	
 	public static boolean setSelectedCharacter(String character) {
