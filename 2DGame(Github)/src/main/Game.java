@@ -78,7 +78,7 @@ public class Game implements Runnable{
     }
 
 	/**
-	 * Method that initializes the level and player using appropriate info  
+	 * Method that initializes the level and player position and size using appropriate info  
 	 */
 	private void initializeClasses() {
 		levelManager = new LevelManager(this);
@@ -111,7 +111,7 @@ public class Game implements Runnable{
 	
 	
 	/**
-	 * Game loop used to run the game 
+	 * Game loop used to set the FPS and the UPS of the game
 	 */
 	@Override
 	public void run() {

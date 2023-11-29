@@ -16,7 +16,7 @@ import main.Game;
  * 
  * Class responsible for loading in the sprites and level information 
  * 
- * @author furqa
+ * @author furqan, licia, farhana
  *
  */
 
@@ -33,7 +33,7 @@ public class LoadSave {
 
 	/**
 	 * 
-	 * Load in the appropriate sprites/level 
+	 * Load in the appropriate sprite 
 	 * 
 	 * @param SpriteFileName
 	 * @return
@@ -89,7 +89,7 @@ public class LoadSave {
 	}
 
 	/**
-	 * load the proper player sprites depending on which character was selected
+	 * load the proper player sprites depending on which character was selected 
 	 * @return
 	 */
 	public static String getPlayerAtlas() {

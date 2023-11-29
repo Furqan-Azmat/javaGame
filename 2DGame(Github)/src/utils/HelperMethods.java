@@ -40,7 +40,7 @@ public class HelperMethods {
 	
 	/**
 	 * 
-	 * Check if where the player is open air or a part of the level design
+	 * Check what parts of the game levels is considered "solid", i.e. the player would collide with 
 	 * 
 	 * @param x
 	 * @param y

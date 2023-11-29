@@ -55,7 +55,7 @@ public class CharacterSelection extends JFrame implements ActionListener {
         fionna.setPreferredSize(new Dimension(300, 300));
         fionna.addActionListener(this);
 
-        panel = new JPanel(null); // Use null layout
+        panel = new JPanel(null); 
         panel.setOpaque(false);
 
         finn.setBounds(200, 200, 304, 304); // Set absolute position for finn button
@@ -79,7 +79,7 @@ public class CharacterSelection extends JFrame implements ActionListener {
 
     
     /**
-     * Update the game to load the proper character sprites and animations 
+     * Update the game to load the proper character sprites and animations based on which button pressed
      */
     @Override
     public void actionPerformed(ActionEvent e) {

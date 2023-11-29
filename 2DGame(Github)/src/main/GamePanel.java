@@ -14,7 +14,7 @@ import static main.Game.GAME_HEIGHT;
 
 /**
  * 
- * Class that creates the overall gamescreen as well as the score display 
+ * Class that creates the playable game screen as well as the score display 
  * 
  * @author Furqan, Licia, Farhana
  *
