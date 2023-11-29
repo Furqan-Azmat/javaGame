@@ -131,7 +131,6 @@ public class Game implements Runnable{
 			if (deltaTime >= 1) {
 				// if the time now - the last time we drew is >= timeperframe, then draw again
 				update();
-				//updates++;
 				deltaTime --;
 			}
 			if (deltaFrame >= 1) {
