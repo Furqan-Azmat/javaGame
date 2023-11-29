@@ -157,17 +157,9 @@ public class Player extends Entity{
 	            animation[i][j] = img.getSubimage(j * 16, i * 16, 16, 16); 
 	}
 		
-	
-	
-	
 	public void reloadAnimation() {
-		
 		loadAnimation();
-		
-		
-		
 	}
-	
 
 	public void loadLvlData(int[][] lvlData) {
 		this.lvlData = lvlData;

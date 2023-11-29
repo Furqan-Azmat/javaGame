@@ -40,9 +40,9 @@ public class Game implements Runnable{
 		levelManager = new LevelManager(this);
 	}
 	
-    public int getLevelNumber() {
-        return lvlNum;
-    }
+//    public int getLevelNumber() {
+//        return lvlNum;
+//    }
 	public void increaseScore(int points) {
         score += points;
         if (score >= 50) {
@@ -82,7 +82,7 @@ public class Game implements Runnable{
 	}
 	
 	private void update() {
-		levelManager.update();
+//		levelManager.update();
 		player.update();
 	} 
 
@@ -100,7 +100,7 @@ public class Game implements Runnable{
 		double timePerUpdate = 1000000000.0 / UPS; //frequency of updates per second
 		long previousTime = System.nanoTime(); //current time when the program starts in nanoseconds
 		int frames = 0;
-		int updates = 0;
+		//int updates = 0;
 		long lastCheck = System.currentTimeMillis();
 		double deltaTime = 0;
 		double deltaFrame = 0;
@@ -113,7 +113,7 @@ public class Game implements Runnable{
 			if (deltaTime >= 1) {
 				// if the time now - the last time we drew is >= timeperframe, then draw again
 				update();
-				updates++;
+				//updates++;
 				deltaTime --;
 			}
 			if (deltaFrame >= 1) {

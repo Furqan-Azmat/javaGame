@@ -30,9 +30,9 @@ public class GamePanel extends JPanel {
 		System.out.println("size: " + GAME_WIDTH + " x " + GAME_HEIGHT);
 	}
 	
-	public void updateGame() {
-		
-	}
+//	public void updateGame() {
+//		
+//	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

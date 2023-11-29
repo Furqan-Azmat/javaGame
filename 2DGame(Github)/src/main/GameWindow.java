@@ -13,7 +13,7 @@ public class GameWindow extends JFrame{
 	private JPanel menuPanel;
 	private JButton start, quit;
 	private ButtonHandler handler;
-	private GameWindow window;
+	//private GameWindow window;
 	private Game game;
 	private JLayeredPane layeredPane;
 	private ImageIcon backgroundIcon;
@@ -51,7 +51,7 @@ public class GameWindow extends JFrame{
 	    layeredPane.add(menuPanel, JLayeredPane.PALETTE_LAYER);
         add(layeredPane);
 		
-		window = this;
+		//window = this;
 		setVisible(true); // makes the window visible (ADD EVERYTHING THAT WILL SHOW UP BEFORE THIS LINE)
 	}
 	

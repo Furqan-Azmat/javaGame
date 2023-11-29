@@ -33,9 +33,9 @@ public class LevelManager {
         game.getPlayer().loadLvlData(level.getLevelData());
     }
     
-    public int getLevelNumber() {
-        return lvlNum;
-    }
+//    public int getLevelNumber() {
+//        return lvlNum;
+//    }
 
 	private void importTileSprite() {
 		BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.LEVELATLAS);
@@ -148,9 +148,9 @@ public class LevelManager {
 	 	}
 	 }
 
-	public void update() {
-		
-	}
+//	public void update() {
+//		
+//	}
 
 	public Level getCurrentLevel() {
 		return level;
