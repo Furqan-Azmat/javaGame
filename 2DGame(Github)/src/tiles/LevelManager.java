@@ -33,8 +33,6 @@ public class LevelManager {
         game.getPlayer().loadLvlData(level.getLevelData());
     }
     
-
-
 	private void importTileSprite() {
 		BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.LEVELATLAS);
 		levelSprite = new BufferedImage[2];	//number of tiles our tile sprite has
@@ -145,7 +143,6 @@ public class LevelManager {
 	     		break;
 	 	}
 	 }
-
 
 	public Level getCurrentLevel() {
 		return level;

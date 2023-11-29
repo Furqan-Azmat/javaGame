@@ -50,7 +50,6 @@ public class GameWindow extends JFrame{
 	    layeredPane.add(menuPanel, JLayeredPane.PALETTE_LAYER);
         add(layeredPane);
 		
-		//window = this;
 		setVisible(true); // makes the window visible (ADD EVERYTHING THAT WILL SHOW UP BEFORE THIS LINE)
 	}
 	
