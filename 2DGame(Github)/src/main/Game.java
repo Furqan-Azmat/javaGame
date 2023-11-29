@@ -1,10 +1,17 @@
 package main;
 
 import java.awt.Graphics;
-
 import Sound.Sound;
 import entities.Player;
 import tiles.LevelManager;
+
+/**
+ * 
+ * Class that is responsible to handle all tasks involved with game logic 
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
 
 public class Game implements Runnable{
 	
@@ -40,23 +47,26 @@ public class Game implements Runnable{
 		levelManager = new LevelManager(this);
 	}
 	
+	/**
+	 * 
+	 * Method that is used to increase the player score every time a coin is collected
+	 * As well as switching to a new level once the threshold has been reached  
+	 * 
+	 * @param points
+	 */
 	public void increaseScore(int points) {
         score += points;
         if (score >= 50) {
             // Reset the score
             score = 0;
-
             // Increment the level number
             lvlNum++;
-
             // If the level number exceeds the maximum level, reset to the first level
             if (lvlNum > 3) {
                 lvlNum = 1;
             }
-
             // Call the changeLevel method in the LevelManager
             levelManager.changeLevel(lvlNum);
-
             // Print a message for testing
             System.out.println("Level changed to: " + lvlNum);
         }
@@ -67,6 +77,9 @@ public class Game implements Runnable{
         return score;
     }
 
+	/**
+	 * Method that initializes the level and player using appropriate info  
+	 */
 	private void initializeClasses() {
 		levelManager = new LevelManager(this);
 		player = new Player((2-1) * TILE_SIZE,(19-1)*TILE_SIZE, (int) (16 * SCALE), (int) (16 * SCALE)); 
@@ -82,6 +95,13 @@ public class Game implements Runnable{
 		player.update();
 	} 
 
+	
+	/**
+	 * Draw the overall level layout, along with the enemies and the coins 
+	 * As well as rendering the player 
+	 * 
+	 * @param g
+	 */
 	public void render(Graphics g) {	
 		levelManager.draw(g);
 		levelManager.addEnemies(g);
@@ -89,8 +109,11 @@ public class Game implements Runnable{
 		player.render(g);
 	}
 	
+	
+	/**
+	 * Game loop used to run the game 
+	 */
 	@Override
-	//game loop
 	public void run() {
 		double timePerFrame = 1000000000.0 / FPS; //how long each frame is going to last in nanoseconds
 		double timePerUpdate = 1000000000.0 / UPS; //frequency of updates per second

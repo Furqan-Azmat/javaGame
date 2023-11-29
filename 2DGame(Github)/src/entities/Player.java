@@ -14,6 +14,13 @@ import main.Game;
 
 import static main.Game.*;
 
+/**
+ * 
+ * Player class that handles all the logic related to the playable character
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
 
 public class Player extends Entity{
 	//basic character movements 
@@ -40,17 +47,28 @@ public class Player extends Entity{
 		initializeHitbox(x, y, (int) (14 * SCALE),(int) (15 * SCALE)); //size of hitbox 	
 	}
 
+	/**
+	 * Constantly update the player character with the proper information
+	 */
 	public void update() {
 		updatePlayerPosition(); //sets player position based on keyboard input 
 		updateAnimation(); // animates the character
 		setAnimation(); //sets animation based on player action 
 	}
 
+	/**
+	 * Draw the playable character
+	 * @param g
+	 */
 	public void render(Graphics g) {
 		g.drawImage(animation[playerAction][animationIndex], (int)(hitbox.x - xDrawOffset), (int) (hitbox.y - yDrawOffset),width,height, null); //64 - size of the sprite, can increase and decrease size 
 		//drawHitbox(g); //for debugging hitbox 
 	}
 	
+	
+	/**
+	 * Method for animating the playable character
+	 */
 	//method to loop through the array list of frames to "animate" the player
 	private void updateAnimation() {
 			animationTick++;
@@ -62,7 +80,9 @@ public class Player extends Entity{
 			}
 	}
 	
-	//method to set the animation of the player based on the action
+	/**
+	 * Method that is used to play the appropriate animation based off the player state
+	 */
 	public void setAnimation() {
 		int startAnimation = playerAction;
 		if(moving)
@@ -78,7 +98,11 @@ public class Player extends Entity{
 		animationTick = 0;
 		animationIndex = 0;
 	}
-	
+	/**
+	 * Method used to allow the player to move around the screen as well as for checking 
+	 * collision with the map layout making sure player does not get stuck
+	 * and is able to move around freely
+	 */
 	private void updatePlayerPosition() {
 		moving = false;
 
@@ -87,21 +111,16 @@ public class Player extends Entity{
 	        xSpeed -= playerSpeed;
 	    if (right)
 	        xSpeed += playerSpeed;
-
 	    updateXPosition(xSpeed);
-
 	    if (jump)
 	        jump();
-
 	    if (!left && !right && !inAir)
 	        return;
-
 	    if (!inAir) {
 	        if (!IsEntityOnFloor(hitbox, lvlData)) {
 	            inAir = true;
 	        }
 	    }
-
 	    if (inAir) {
 	        // Handle Y-axis movement and collisions
 	        float ySpeed = airSpeed + gravity;
@@ -117,10 +136,12 @@ public class Player extends Entity{
 	            }
 	        }
 	    }
-
 	    moving = true;
 	}
 
+	/**
+	 * Method to update the player information if the character is in the air
+	 */
 	private void jump() {
 		if(inAir)
 			return;
@@ -133,6 +154,10 @@ public class Player extends Entity{
 		airSpeed = 0;
 	}
 
+	/**
+	 * Let the player move along the x-axis
+	 * @param xSpeed
+	 */
 	private void updateXPosition(float xSpeed) {
 		if (CanMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
 	        hitbox.x += xSpeed;
@@ -142,7 +167,10 @@ public class Player extends Entity{
 	    }
 	}
 
-	//method to load the player sprite and the frames of the sprite into an array
+	/**
+	 * Method to load in the appropriate player sprite and frames into an array allowing 
+	 * for the character animation 
+	 */
 	private void loadAnimation() {	
 		BufferedImage img;
 	    if (LoadSave.getPlayerAtlas().equals(LoadSave.PLAYERATLAS)) {
@@ -160,13 +188,22 @@ public class Player extends Entity{
 	public void reloadAnimation() {
 		loadAnimation();
 	}
-
+	
+	/**
+	 * 
+	 * Check if the player is in the air 
+	 * 
+	 * @param lvlData
+	 */
 	public void loadLvlData(int[][] lvlData) {
 		this.lvlData = lvlData;
 		if(!IsEntityOnFloor(hitbox, lvlData))
 			inAir = true;
 	}
 	
+	/**
+	 * Respawn the player to specified coordinates 
+	 */
 	public void respawn() {
 		hitbox.x = 32f;
 		hitbox.y = 576f;

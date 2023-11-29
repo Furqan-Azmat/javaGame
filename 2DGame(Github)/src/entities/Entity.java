@@ -7,6 +7,14 @@ import java.awt.geom.Rectangle2D;
 
 import static main.Game.SCALE;
 
+/**
+ * 
+ * Entity class that handles creating the hitbox used by subclasses
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
+
 public abstract class Entity {
 
 	protected float x, y;
@@ -22,6 +30,13 @@ public abstract class Entity {
 		
 	}
 	
+	/**
+	 * 
+	 * Draw a red square to represent the entities hitbox
+	 * Used for testing purposes only 
+	 * 
+	 * @param g
+	 */
 	//for debugging hitbox
 	protected void drawHitbox(Graphics g) { 
 		g.setColor(Color.RED);

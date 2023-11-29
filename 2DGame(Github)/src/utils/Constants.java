@@ -1,5 +1,14 @@
 package utils;
 
+/**
+ * 
+ * Class that keeps track of what state the player is in 
+ * and how many frames of animation that state needs 
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
+
 public class Constants {
 
 	public static class PlayerConstants{

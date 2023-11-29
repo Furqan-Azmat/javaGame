@@ -1,5 +1,3 @@
-//handles all the keyboard inputs for our game 
-
 package inputs;
 
 import java.awt.event.KeyEvent;
@@ -7,6 +5,13 @@ import java.awt.event.KeyListener;
 
 import entities.Player;
 
+/**
+ * 
+ * Handle all keyboard related input for the game
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
 public class KeyboardInputs implements KeyListener{
 	private Player player;
 	

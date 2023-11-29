@@ -8,6 +8,14 @@ import java.net.URL;
 
 import javax.swing.*;
 
+/**
+ * 
+ * Class that creates the initial menu screen 
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
+
 public class GameWindow extends JFrame{
 	
 	private JPanel menuPanel;
@@ -18,6 +26,9 @@ public class GameWindow extends JFrame{
 	private ImageIcon backgroundIcon;
 	private JLabel backgroundLabel;
 	
+	/**
+	 * Set up main menu
+	 */
 	public GameWindow() { 
 		game = new Game(this);
 		
@@ -54,8 +65,11 @@ public class GameWindow extends JFrame{
 		setVisible(true); // makes the window visible (ADD EVERYTHING THAT WILL SHOW UP BEFORE THIS LINE)
 	}
 	
+	
+	/**
+	 * Create buttons(Start and Quit) for main menu
+	 */
 	public void menu() {
-		// create buttons with images for starting and quitting the game
 		
 		start = new JButton(new ImageIcon("res/start.png"));
 		start.setRolloverIcon(new ImageIcon("res/hoverstart.png"));
@@ -83,6 +97,11 @@ public class GameWindow extends JFrame{
 		backgroundLabel.setVisible(false);
 	}
 	
+	/**
+	 * 
+	 * Perform appropriate action after button is clicked 
+	 *
+	 */
 	private class ButtonHandler implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == start) { 

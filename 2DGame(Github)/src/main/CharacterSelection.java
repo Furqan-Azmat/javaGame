@@ -10,6 +10,13 @@ import javax.swing.JPanel;
 
 import utils.LoadSave;
 
+/**
+ * 
+ * Class to allow you to select multiple characters 
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
 
 public class CharacterSelection extends JFrame implements ActionListener {
 
@@ -33,6 +40,10 @@ public class CharacterSelection extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
+    
+    /**
+     * Display the characters than can be selected from 
+     */
     public void selectYourCharacter() {
         finn = new JButton(new ImageIcon("res/finnCharacterSelection.png"));
         finn.setRolloverIcon(new ImageIcon("res/finnCharacterSelectionRollover.png"));
@@ -66,6 +77,10 @@ public class CharacterSelection extends JFrame implements ActionListener {
         panel.add(fionna);
     }
 
+    
+    /**
+     * Update the game to load the proper character sprites and animations 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
     	if (e.getSource() == finn) {

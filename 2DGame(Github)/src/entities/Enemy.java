@@ -7,11 +7,19 @@ import javax.swing.JPanel;
 
 import utils.LoadSave;
 
+/**
+ * 
+ * Class for creating and handling all enemy related methods 
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
 public abstract class Enemy extends Entity{
     BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.ENEMYATLAS);
     private float locationA;
     private float locationB;
     private boolean forward = true;
+    
 
     public Enemy(float x, float y, int width, int height) {
         super(x, y, width, height);
@@ -21,6 +29,12 @@ public abstract class Enemy extends Entity{
 
     public abstract void drawCharacter(Graphics g); // abstract method forces implementation of enemy appearance for each enemy type
 
+    /**
+     * 
+     * Makes the enemies move on screen 
+     * 
+     * @param speed
+     */
     public void movement(float speed) {
         // horizontally move enemy back and forth
         if (forward == true)

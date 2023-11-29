@@ -1,5 +1,13 @@
 package tiles;
 
+/**
+ * 
+ * Populate level with proper sprites 
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
+
 public class Level {
 	
 	private int[][] lvlData;

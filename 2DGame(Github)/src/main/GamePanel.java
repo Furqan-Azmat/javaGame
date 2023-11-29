@@ -12,6 +12,14 @@ import inputs.KeyboardInputs;
 import static main.Game.GAME_WIDTH;
 import static main.Game.GAME_HEIGHT;
 
+/**
+ * 
+ * Class that creates the overall gamescreen as well as the score display 
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
+
 public class GamePanel extends JPanel { 
 	
 	private Game game;

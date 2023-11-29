@@ -2,8 +2,15 @@ package entities;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-
 import utils.LoadSave;
+
+/**
+ * 
+ * Coin class that is responsible for creating coin objects and checking for collision
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
 
 public class Coins extends Entity{
 	BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.COINATLAS);
@@ -12,6 +19,7 @@ public class Coins extends Entity{
 	private boolean up = true;
 	float locationA, locationB;
 	
+
 	public Coins(float x, float y, int width, int height) {
 		super(x, y, width, height);
 		initializeHitbox(x, y, width, height);	
@@ -19,6 +27,11 @@ public class Coins extends Entity{
 		locationB = y - 10;
 	}
 	
+	/**
+	 * Method to draw coins by using the Graphics method 
+	 * 
+	 * @param g
+	 */
 	public void drawCoin(Graphics g) {
     	// Initially start by displaying coins
         if (isDisplayed) {
@@ -26,6 +39,11 @@ public class Coins extends Entity{
             movement();
         }
     }
+	
+	/**
+	 * Method to move the coin up and game 
+	 * Moves the coin between 2 positions (locationA and locationB)
+	 */
     public void movement() {
     	if (up == true)
 			y = y - 0.25f;
@@ -36,7 +54,16 @@ public class Coins extends Entity{
 		else if (y == locationA)
 			up = true;
     }
-    // If the coin is visible and the coins hitbox intersects the players hitbox
+    
+    /**
+     * Method to check whether or not the player has "picked up" a coin 
+     * Checks to see if isDisplayed && super.getHitbox().intersects(player.getHitbox())
+     * are both true, if they are it sets isDisplayed to false which tells the code to no
+     * longer have it drawn on screen
+     * 
+     * @param player
+     * @return
+     */
     public boolean checkCollisionWithPlayer(Player player) {
         if (isDisplayed && super.getHitbox().intersects(player.getHitbox())) {
             isDisplayed = false; // Turn the coin that was touched off 
@@ -44,7 +71,11 @@ public class Coins extends Entity{
         }
         return false; // No collision
     }
-
+    
+    /**
+     * Check the value of the isDiaplayed variable
+     * @return
+     */
     public boolean isDisplayed() {
         return isDisplayed;
     }

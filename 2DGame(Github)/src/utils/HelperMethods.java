@@ -7,8 +7,27 @@ import static main.Game.GAME_HEIGHT;
 import static main.Game.TILE_SIZE;
 import java.awt.geom.Rectangle2D;
 
+/**
+ * 
+ * Class that is responsible for handling all game collision 
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
+
 public class HelperMethods {
 	
+	/**
+	 * 
+	 * Create a barrier around the screen that prevents the player from leaving it 
+	 * 
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @param lvlData
+	 * @return
+	 */
 	public static boolean CanMoveHere(float x, float y, float width, float height, int[][] lvlData) {
 		if(!IsSolid(x,y, lvlData)) //top left 
 			if(!IsSolid(x+width, y+height, lvlData)) // bottom right 
@@ -18,6 +37,16 @@ public class HelperMethods {
 		return false;				
 	}
 
+	
+	/**
+	 * 
+	 * Check if where the player is open air or a part of the level design
+	 * 
+	 * @param x
+	 * @param y
+	 * @param lvlData
+	 * @return
+	 */
 	private static boolean IsSolid(float x, float y, int[][] lvlData) {
 		
 		if(x < 0 || x >= GAME_WIDTH) //if x position is outside the entire game map width
@@ -43,6 +72,14 @@ public class HelperMethods {
 		return false;		
 	}
 	
+	/**
+	 * 
+	 * Check if the player is next to a wall 
+	 * 
+	 * @param hitbox
+	 * @param xSpeed
+	 * @return
+	 */
 	public static float GetEntityPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
 		int currentTile = (int) (hitbox.x / TILE_SIZE); // current tile the entity is on
 		if (xSpeed > 0) {
@@ -57,6 +94,14 @@ public class HelperMethods {
 		}
 	}
 	
+	/**
+	 * 
+	 * Controls how the player behaves when approaching terrain from below
+	 * 
+	 * @param hitbox
+	 * @param ySpeed
+	 * @return
+	 */
 	public static float GetEntityYPosUnderRoofOrAboveFloor(Rectangle2D.Float hitbox, float ySpeed) {
 		int currentTile = (int) (hitbox.y / TILE_SIZE); // current tile the entity is on
 		if (ySpeed > 0) {
@@ -71,6 +116,13 @@ public class HelperMethods {
 		}
 	}
 	
+	/**
+	 * Check of player is on the floor 
+	 * 
+	 * @param hitbox
+	 * @param lvlData
+	 * @return
+	 */
 	public static boolean IsEntityOnFloor(Rectangle2D.Float hitbox, int[][] lvlData) {
 		//check the pixel below bottom left and bottom right 
 		if(!IsSolid(hitbox.x, hitbox.y + hitbox.height +1, lvlData)) //bottom left

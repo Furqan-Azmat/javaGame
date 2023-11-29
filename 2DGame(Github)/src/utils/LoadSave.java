@@ -12,6 +12,15 @@ import javax.imageio.ImageIO;
 
 import main.Game;
 
+/**
+ * 
+ * Class responsible for loading in the sprites and level information 
+ * 
+ * @author furqa
+ *
+ */
+
+
 public class LoadSave {
 	
 	private static String selectedCharacter = "";
@@ -22,6 +31,13 @@ public class LoadSave {
 	public static final String ENEMYATLAS = "enemySprite.png";
 	public static final String COINATLAS = "Coin1.png";
 
+	/**
+	 * 
+	 * Load in the appropriate sprites/level 
+	 * 
+	 * @param SpriteFileName
+	 * @return
+	 */
 	public static BufferedImage GetSpriteAtlas(String SpriteFileName) {
 		BufferedImage img = null;
 		InputStream in = LoadSave.class.getResourceAsStream("/" + SpriteFileName);
@@ -34,6 +50,12 @@ public class LoadSave {
 		return img;
 	}
 	
+	
+	/**
+	 * Load the different levels and store the layout in an array 
+	 * @param lvlnum
+	 * @return
+	 */
 	public static int[][] getLevelData(int lvlnum){
 		String fileName = null;
 		switch (lvlnum) {
@@ -66,6 +88,10 @@ public class LoadSave {
 		return lvlData;
 	}
 
+	/**
+	 * load the proper player sprites depending on which character was selected
+	 * @return
+	 */
 	public static String getPlayerAtlas() {
 		switch (selectedCharacter) {
         

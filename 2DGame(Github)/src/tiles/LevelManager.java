@@ -7,6 +7,16 @@ import entities.*;
 import main.Game;
 import utils.LoadSave;
 
+/**
+ * 
+ * Class that is responsible for loading/drawing all the appropriate 
+ * features onto the level
+ * 
+ * @author Furqan, Licia, Farhana
+ *
+ */
+
+
 public class LevelManager {
 	
 	private Game game;
@@ -24,6 +34,9 @@ public class LevelManager {
         initializeEnemies();
 	}
 	
+	/**
+	 * Change/update the level once the target score has been reached 
+	 */
     public void changeLevel(int newLevel) {
         lvlNum = newLevel;
         level = new Level(LoadSave.getLevelData(lvlNum));
@@ -34,7 +47,9 @@ public class LevelManager {
     }
     
 
-
+    /**
+     * Method to import the tiles that the level has 
+     */
 	private void importTileSprite() {
 		BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.LEVELATLAS);
 		levelSprite = new BufferedImage[2];	//number of tiles our tile sprite has
@@ -45,6 +60,10 @@ public class LevelManager {
 			}
 	}
 
+	/**
+	 * Draw teh tiles that were loaded in 
+	 * @param g
+	 */
 	public void draw(Graphics g) {
 		int x = 0;
 		int y = 0;
@@ -60,7 +79,11 @@ public class LevelManager {
 		}
 	}
 	 
-	// Loop through the coin array made below and draw them along with checking for player collision 
+	/**
+	 * Loop through the coin array and check whether or not the coin needs to be erased 
+	 * as well as increasing the players score 
+	 * @param g
+	 */
 	public void addCoins(Graphics g) {
 		for (Coins coin : coins) {
 			coin.drawCoin(g);
@@ -70,7 +93,11 @@ public class LevelManager {
 	        }
 	    }
 	}
-	 // place enemies and respawn player when player touches the enemies
+	/**
+	 * Loop through the enemy array and check whether or not the enemy has been interacted with 
+	 * if true respawn the player using the respawn method
+	 * @param g
+	 */
 	 public void addEnemies(Graphics g) {
 		 for (Enemy e : enemies) {
 			 e.drawCharacter(g);
@@ -81,6 +108,10 @@ public class LevelManager {
 		 }
 	 }
 	 
+	 /**
+	  * Initialize the enemy array which stores what type of enemy 
+	  * and where the enemies are located in each level 
+	  */
 	 private void initializeEnemies() {
 		 switch (lvlNum) {
 	     	case 1:
@@ -113,7 +144,9 @@ public class LevelManager {
 		 }
 	 }
 
-	 // Initialize the array that will hold the coin objects for each map
+	 /**
+	  * Initialize coin array which contains the location of coins for each level 
+	  */
 	 private void initializeCoins() {
 		 switch (lvlNum) {
 	     	case 1:
