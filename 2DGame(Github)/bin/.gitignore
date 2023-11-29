@@ -1,13 +1,3 @@
-/utils/
-/tiles/
-/Sound/
 /main/
-/entities/
-/AdventureTimeLogo.png
-/finnCharacterSelection.png
-/finnCharacterSelectionRollover.png
-/fionnaCharacterSelection.png
-/fionnaCharacterSelectionRollover.png
-/logo.png
-/player2.png
-/inputs/
+/tiles/
+/utils/

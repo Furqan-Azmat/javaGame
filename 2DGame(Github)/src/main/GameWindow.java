@@ -13,7 +13,6 @@ public class GameWindow extends JFrame{
 	private JPanel menuPanel;
 	private JButton start, quit;
 	private ButtonHandler handler;
-	//private GameWindow window;
 	private Game game;
 	private JLayeredPane layeredPane;
 	private ImageIcon backgroundIcon;
